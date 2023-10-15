@@ -13,9 +13,10 @@ DATA_URL = 'https://hugovk.github.io/top-pypi-packages/top-pypi-packages-30-days
 
 
 packages_file = 'packages.txt'
-linux_packages_file = 'linux_pkgs.txt'
-windows_packages_file = 'win_pkgs.txt'
-excluded_packages_file = 'excluded_pkgs.txt'
+linux_packages_file = 'pkgs_linux.txt'
+windows_packages_file = 'pkgs_win.txt'
+excluded_packages_file = 'pkgs_ex.txt'
+included_packages_file = 'pkgs_in.txt'
 
 
 excluded_packages = [
@@ -29,6 +30,11 @@ linux_only_packages = [
 
 windows_only_packages = [
 
+]
+
+include_packages = [
+    'paddlepaddle',
+    'paddleocr'
 ]
 
 
@@ -98,12 +104,14 @@ def main():
     print(f'Linux:\t{len(linux)}')
     print(f'Windows:\t{len(windows)}')
     print(f'Excluded:\t{len(excluded)}')
+    print(f'Included:\t{len(include_packages)}')
 
     start_time = time.perf_counter()
     write_packages(common, packages_file)
     write_packages(linux, linux_packages_file)
     write_packages(windows, windows_packages_file)
     write_packages(excluded, excluded_packages_file)
+    write_packages(include_packages, included_packages_file)
     end_time = time.perf_counter()
     print(f'Wrote packages in {end_time - start_time:.6f} seconds')
 

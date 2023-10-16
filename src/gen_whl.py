@@ -30,7 +30,10 @@ def gen_index():
     for file in rl_list:
         whl_index = '<a href=\"' + file['url'] + '\">' + quote_plus(file['name']) + '</a><br>\n'
         rl_html += whl_index
-    return f'<!DOCTYPE html>\n{rl_html}'
+    return ('<!DOCTYPE html>'
+            '<html><body>\n'
+            f'{rl_html}'
+            '</body></html>')
 
 
 def gen_html():
@@ -42,7 +45,7 @@ def gen_html():
 def gen_html_cdn():
     with open(f'{whl_dir}/{whl_file}', 'r', encoding='utf-8') as html_file:
         html = html_file.read()
-    with open(f'{whl_dir}/{whl_file}-cn.html', 'w', encoding='utf-8') as html_file:
+    with open(f'{whl_dir}/wheels-cn.html', 'w', encoding='utf-8') as html_file:
         html_file.write(html.replace('https://github.com/', 'https://gh.kmtea.eu/https://github.com/'))
 
 

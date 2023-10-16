@@ -35,7 +35,9 @@ def build(ver: str):
     pbar = tqdm(packages)
     for pkg in pbar:
         pbar.set_description(f'Success: {len(success)}, Failed: {len(failed)}, Current: {pkg}')
-        command = f'{WIN_WORK_DIR}\\{ver}\\python.exe -m pip install -U {pkg}'
+        command = (f'{WIN_WORK_DIR}\\{ver}\\python.exe -m '
+                   f'pip install -U {pkg} '
+                   f'--extra-index-url https://pypy.kmtea.eu/wheels.html')
         try:
             result = subprocess.run(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             if result:

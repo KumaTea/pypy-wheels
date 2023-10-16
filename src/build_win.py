@@ -18,24 +18,42 @@ def check_pypy(ver: str):
         prepare(ver)
 
 
-def copy_wheels(ver: str):
-    print(f'Copying wheels for pypy {ver}...')
+def copy_wheels():
+    print(f'Copying wheels for pypy...')
     pip_cache_dir = get_pip_cache_dir()
-    if not os.path.exists(WIN_WHEEL_DIR):
+    if not os.path.exists(pip_cache_dir):
         return None
+
+    for ver in build_versions:
+        os.makedirs(f'{WIN_WHEEL_DIR}\\{ver}', exist_ok=True)
+    os.makedirs(f'{WIN_WHEEL_DIR}\\none', exist_ok=True)
 
     # find whl file in pip cache
     whl_files = []
     for root, dirs, files in os.walk(pip_cache_dir):
         for file in files:
             if file.endswith('.whl'):
-                whl_files.append(os.path.join(root, file))
+                whl_files.append((root, file))
 
     # copy whl file to wheel dir
     pbar = tqdm(whl_files)
-    for file in pbar:
-        pbar.set_description(file.replace(pip_cache_dir, ''))
-        shutil.copy(file, WIN_WHEEL_DIR)
+    copied_files = []
+    for root, file in pbar:
+        if file in copied_files:
+            continue
+        else:
+            pbar.set_description(f'Coping {file}')
+            for ver in build_versions:
+                if f'pp{ver.replace(".", "")}-pypy{ver.replace(".", "")}' in file:
+                    shutil.copy(f'{root}\\{file}', f'{WIN_WHEEL_DIR}\\{ver}\\{file}')
+                    copied_files.append(file)
+                    break
+            else:
+                shutil.copy(f'{root}\\{file}', f'{WIN_WHEEL_DIR}\\none\\{file}')
+                copied_files.append(file)
+
+    print(f'Copied {len(copied_files)} wheels')
+    return copied_files
 
 
 def build(ver: str):
@@ -46,10 +64,13 @@ def build(ver: str):
     success = []
     failed = []
 
-    with open('packages.txt', 'r') as f:
+    with open('../packages.txt', 'r') as f:
         packages = f.read().splitlines()
 
-    with open('pkgs_win.txt', 'r') as f:
+    with open('../pkgs_win.txt', 'r') as f:
+        packages = packages + f.read().splitlines()
+
+    with open('../pkgs_in.txt', 'r') as f:
         packages = packages + f.read().splitlines()
 
     pbar = tqdm(packages)
@@ -65,5 +86,3 @@ def build(ver: str):
             print(e)
 
     print(f'Success: {len(success)}, Failed: {len(failed)}')
-
-    copy_wheels(ver)

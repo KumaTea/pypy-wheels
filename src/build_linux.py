@@ -1,22 +1,25 @@
+import argparse
 import subprocess
 from config import *
 from tqdm import tqdm
-from prepare_win import prepare
 
 
-def check_pypy(ver: str):
-    command = f'{WIN_WORK_DIR}\\{ver}\\python.exe -m pip list'
-    try:
-        result = subprocess.run(command.split(), stdout=subprocess.PIPE)
-        if result:
-            print(f'pypy {ver} is ready')
-    except FileNotFoundError:
-        print(f'pypy {ver} not found, initializing...')
-        prepare(ver)
+arg = argparse.ArgumentParser()
+arg.add_argument('-V', '--ver', help='pypy version')
+args = arg.parse_args()
+
+
+def get_pypy(ver: str):
+    return f'/opt/python/pp{ver.replace(".", "")}-pypy{ver.replace(".", "")}/bin/pypy3'
 
 
 def build(ver: str):
-    check_pypy(ver)
+    if not ver:
+        ver = args.ver
+    if ver not in build_versions:
+        print(f'pypy {ver} not found')
+        exit(1)
+    pypy_path = get_pypy(ver)
 
     print(f'Building wheels for pypy {ver}...')
     # packages = []
@@ -26,7 +29,7 @@ def build(ver: str):
     with open('../packages.txt', 'r') as f:
         packages = f.read().splitlines()
 
-    with open('../pkgs_win.txt', 'r') as f:
+    with open('../pkgs_linux.txt', 'r') as f:
         packages = packages + f.read().splitlines()
 
     with open('../pkgs_in.txt', 'r') as f:
@@ -35,7 +38,7 @@ def build(ver: str):
     pbar = tqdm(packages)
     for pkg in pbar:
         pbar.set_description(f'Success: {len(success)}, Failed: {len(failed)}, Current: {pkg}')
-        command = f'{WIN_WORK_DIR}\\{ver}\\python.exe -m pip install -U {pkg}'
+        command = f'{pypy_path} -m pip install -U {pkg}'
         try:
             result = subprocess.run(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             if result:

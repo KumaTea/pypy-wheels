@@ -1,6 +1,6 @@
 import subprocess
 from config import *
-from tqdm import tqdm
+from build import build, args
 from prepare_win import prepare
 
 
@@ -15,42 +15,27 @@ def check_pypy(ver: str):
         prepare(ver)
 
 
-def build(ver: str):
+def build_win(ver: str = None, since: str = None):
+    if not ver:
+        ver = args.ver
+    if ver not in build_versions:
+        print(f'pypy {ver} not found')
+        exit(1)
     check_pypy(ver)
 
-    print(f'Building wheels for pypy {ver}...')
-    # packages = []
-    success = []
-    failed = []
+    py_path = f'{WIN_WORK_DIR}\\{ver}\\python.exe'
+    plat = 'win'
 
-    with open('../packages.txt', 'r') as f:
-        packages = f.read().splitlines()
+    return build(
+        ver=ver,
+        py_path=py_path,
+        plat=plat,
+        since=since
+    )
 
-    with open('../pkgs_win.txt', 'r') as f:
-        packages = packages + f.read().splitlines()
 
-    with open('../pkgs_in.txt', 'r') as f:
-        packages = packages + f.read().splitlines()
-
-    packages = list(set(packages))
-
-    pbar = tqdm(packages)
-    for pkg in pbar:
-        pbar.set_description(f'Success: {len(success)}, Failed: {len(failed)}, Current: {pkg}')
-        command = (f'{WIN_WORK_DIR}\\{ver}\\python.exe -m '
-                   f'pip install -U {pkg} '
-                   f'--extra-index-url https://pypy.kmtea.eu/wheels.html')
-        try:
-            result = subprocess.run(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            if f'Successfully installed {pkg}' in result.stdout.decode('utf-8').lower():
-                success.append(pkg)
-            elif f'Requirement already satisfied: {pkg}' in result.stdout.decode('utf-8').lower():
-                success.append(pkg)
-            else:
-                failed.append(pkg)
-                print(result.stdout.decode('utf-8'))
-        except Exception as e:
-            failed.append(pkg)
-            print(e)
-
-    print(f'Success: {len(success)}, Failed: {len(failed)}')
+if __name__ == '__main__':
+    build_win(
+        ver=args.ver,
+        since=args.since
+    )

@@ -40,9 +40,17 @@ def copy_wheels(dst: str):
         for file in files:
             if file.endswith('.whl'):
                 whl_files.append((root, file))
+    
+    with open('../whl/wheels.html', 'r', encoding='utf-8') as f:
+        whl_html = f.read()
 
     # copy whl file to wheel dir
-    pbar = tqdm(whl_files)
+    new_whl = []
+    for root, file in whl_files:
+        if file not in whl_html:
+            new_whl.append((root, file))
+
+    pbar = tqdm(new_whl)
     copied_files = []
     for root, file in pbar:
         if file in copied_files:

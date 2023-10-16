@@ -21,7 +21,8 @@ included_packages_file = '../pkgs_in.txt'
 
 excluded_packages = [
     'torch',
-    'tensorflow'
+    'tensorflow',
+    'cudnn'
 ]
 
 linux_only_packages = [
@@ -34,7 +35,9 @@ windows_only_packages = [
 
 include_packages = [
     'paddlepaddle',
-    'paddleocr'
+    'paddleocr',
+    'pyrogram',
+    'tgcrypto'
 ]
 
 
@@ -49,8 +52,7 @@ def get_top_packages(url: str = DATA_URL) -> list[str]:
         # yield package['project']
         packages.append(package['project'])
 
-    # we want only the top 1,000 packages
-    return packages[:1000]
+    return packages
 
 
 # common, linux, windows, excluded
@@ -64,11 +66,12 @@ def gen_packages(packages: list = None) -> tuple[list[str], list[str], list[str]
     excluded = []
 
     # excluded
-    for to_exclude in excluded_packages:
-        for to_check in packages.copy():
+    for to_check in packages.copy():
+        for to_exclude in excluded_packages:
             if to_exclude in to_check:
                 excluded.append(to_check)
                 packages.remove(to_check)
+                print(f'Excluded {to_check}')
                 break
 
     # linux and windows

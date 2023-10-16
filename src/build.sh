@@ -1,5 +1,7 @@
 # build script for linux
 
+set -ex
+
 HOST_PYTHON='/opt/python/cp312-cp312/bin/python3'
 
 BUILD_VER=$1

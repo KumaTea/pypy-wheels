@@ -1,2 +1,4 @@
 paddlepaddle
 paddleocr
+pyrogram
+tgcrypto

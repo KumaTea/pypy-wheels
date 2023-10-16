@@ -32,6 +32,8 @@ def build(ver: str):
     with open('../pkgs_in.txt', 'r') as f:
         packages = packages + f.read().splitlines()
 
+    packages = list(set(packages))
+
     pbar = tqdm(packages)
     for pkg in pbar:
         pbar.set_description(f'Success: {len(success)}, Failed: {len(failed)}, Current: {pkg}')
@@ -40,8 +42,13 @@ def build(ver: str):
                    f'--extra-index-url https://pypy.kmtea.eu/wheels.html')
         try:
             result = subprocess.run(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            if result:
+            if f'Successfully installed {pkg}' in result.stdout.decode('utf-8').lower():
                 success.append(pkg)
+            elif f'Requirement already satisfied: {pkg}' in result.stdout.decode('utf-8').lower():
+                success.append(pkg)
+            else:
+                failed.append(pkg)
+                print(result.stdout.decode('utf-8'))
         except Exception as e:
             failed.append(pkg)
             print(e)

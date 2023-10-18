@@ -7,7 +7,7 @@ from versions import PYTHON_TO_PYPY
 
 
 def get_pip_cache_dir() -> str:
-    command = 'pip cache dir'
+    command = 'python3.12 -m pip cache dir'
     result = subprocess.run(command.split(), stdout=subprocess.PIPE)
     return result.stdout.decode().strip()
 
@@ -31,8 +31,8 @@ def copy_wheels(dst: str):
 
     os.makedirs(dst, exist_ok=True)
     for ver in build_versions:
-        os.makedirs(f'{dst}\\{ver}', exist_ok=True)
-    os.makedirs(f'{dst}\\none', exist_ok=True)
+        os.makedirs(f'{dst}/{ver}', exist_ok=True)
+    os.makedirs(f'{dst}/none', exist_ok=True)
 
     # find whl file in pip cache
     whl_files = []
@@ -59,12 +59,14 @@ def copy_wheels(dst: str):
             pbar.set_description(f'Coping {file}')
             for ver in build_versions:
                 if f'pp{ver.replace(".", "")}-pypy{ver.replace(".", "")}' in file:
-                    shutil.copy(f'{root}\\{file}', f'{dst}\\{ver}\\{file}')
+                    if not (os.path.isfile(f'{dst}/{ver}/{file}') or os.path.isfile(f'{LINUX_MANY_DIR}/done/{file}')):
+                        shutil.copy(f'{root}/{file}', f'{dst}/{ver}/{file}')
+                        copied_files.append(file)
+                        break
+            if 'none' in file:
+                if not (os.path.isfile(f'{dst}/none/{file}') or os.path.isfile(f'{LINUX_MANY_DIR}/done/{file}')):
+                    shutil.copy(f'{root}/{file}', f'{dst}/none/{file}')
                     copied_files.append(file)
-                    break
-            else:
-                shutil.copy(f'{root}\\{file}', f'{dst}\\none\\{file}')
-                copied_files.append(file)
 
     print(f'Copied {len(copied_files)} wheels')
     return copied_files

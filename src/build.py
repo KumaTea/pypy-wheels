@@ -35,7 +35,7 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None):
     with open('../pkgs_in.txt', 'r') as f:
         packages = packages + f.read().splitlines()
 
-    packages = list(set(packages))
+    # packages = list(set(packages))
     if since:
         index = packages.index(since)
         if index > 0:

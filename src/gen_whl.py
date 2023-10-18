@@ -1,6 +1,5 @@
 import requests
 from tqdm import tqdm
-from urllib.parse import quote_plus
 
 
 author = 'KumaTea'
@@ -33,7 +32,10 @@ def gen_index():
     rl_list.sort(key=lambda x: x['name'].lower())
 
     for file in rl_list:
-        whl_index = '<a href=\"' + file['url'] + '\">' + quote_plus(file['name']) + '</a><br>\n'
+        whl_index = (
+                '<a href=\"' + file['url'] + '\">' +
+                file['name'] +
+                '</a><br>\n')
         rl_html += whl_index
     return ('<!DOCTYPE html>'
             '<html><body>\n'

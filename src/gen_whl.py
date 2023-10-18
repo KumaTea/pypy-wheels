@@ -1,4 +1,5 @@
 import requests
+from tqdm import tqdm
 from urllib.parse import quote_plus
 
 
@@ -15,7 +16,7 @@ def get_gh_rl(a, p):
     result_raw = requests.get(gh_rl_api.format(author=a, project=p)).json()
     for release in result_raw:
         if release['assets']:
-            for binary in release['assets']:
+            for binary in tqdm(release['assets']):
                 if 'whl' in binary['name']:
                     assets.append({
                         'name': binary['name'],

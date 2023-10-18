@@ -28,6 +28,10 @@ def get_gh_rl(a, p):
 def gen_index():
     rl_list = get_gh_rl(author, project)
     rl_html = ''
+
+    # sort by filename
+    rl_list.sort(key=lambda x: x['name'].lower())
+
     for file in rl_list:
         whl_index = '<a href=\"' + file['url'] + '\">' + quote_plus(file['name']) + '</a><br>\n'
         rl_html += whl_index

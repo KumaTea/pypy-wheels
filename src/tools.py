@@ -7,7 +7,10 @@ from versions import PYTHON_TO_PYPY
 
 
 def get_pip_cache_dir() -> str:
-    command = 'python3.12 -m pip cache dir'
+    if os.name == 'nt':
+        command = 'pip cache dir'
+    else:
+        command = 'python3.12 -m pip cache dir'
     result = subprocess.run(command.split(), stdout=subprocess.PIPE)
     return result.stdout.decode().strip()
 

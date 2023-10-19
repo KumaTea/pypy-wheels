@@ -1,6 +1,6 @@
 import subprocess
 from config import *
-from build import build, args
+from build import build, args, uninst_all
 from prepare_win import prepare
 
 
@@ -15,7 +15,7 @@ def check_pypy(ver: str):
         prepare(ver)
 
 
-def build_win(ver: str = None, since: str = None):
+def build_win(ver: str = None, since: str = None, only: str = None):
     if not ver:
         ver = args.ver
     if ver not in build_versions:
@@ -30,12 +30,31 @@ def build_win(ver: str = None, since: str = None):
         ver=ver,
         py_path=py_path,
         plat=plat,
-        since=since
+        since=since,
+        only=only
+    )
+
+
+def uninst_win(ver: str = None):
+    if not ver:
+        ver = args.ver
+    if ver not in build_versions:
+        print(f'pypy {ver} not found')
+        exit(1)
+
+    py_path = f'{WIN_WORK_DIR}\\{ver}\\python.exe'
+    plat = 'win'
+
+    return uninst_all(
+        ver=ver,
+        py_path=py_path,
+        plat=plat
     )
 
 
 if __name__ == '__main__':
     build_win(
         ver=args.ver,
-        since=args.since
+        since=args.since,
+        only=args.only
     )

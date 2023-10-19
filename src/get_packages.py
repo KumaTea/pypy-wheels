@@ -22,7 +22,11 @@ included_packages_file = '../pkgs_in.txt'
 excluded_packages = [
     'torch',
     'tensorflow',
-    'cudnn'
+    'cudnn',
+    'aws',
+    'azure',
+    'google',
+    'gcloud'
 ]
 
 linux_only_packages = [
@@ -34,10 +38,6 @@ windows_only_packages = [
 ]
 
 include_packages = [
-    'paddlepaddle',
-    'paddleocr',
-    'pyrogram',
-    'tgcrypto'
 ]
 
 

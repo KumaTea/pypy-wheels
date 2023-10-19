@@ -56,7 +56,7 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, only: st
         command = (f'{py_path} -m '
                    f'pip install -U {flags} '
                    f'{pkg} '
-                   f'--extra-index-url https://pypy.kmtea.eu/wheels.html')
+                   f'--find-links https://pypy.kmtea.eu/wheels.html')
         try:
             result = subprocess.run(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             if f'Successfully installed {pkg}' in (result.stdout.decode('utf-8') + result.stdout.decode('utf-8')):

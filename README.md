@@ -4,13 +4,13 @@ Prebuilt PyPy wheels of the most popular packages
 ## How to use
 
 ```bash
-pip install <package> --extra-index-url https://pypy.kmtea.eu/wheels.html
+pip install <package> --find-links https://pypy.kmtea.eu/wheels.html
 ```
 If you have trouble accessing GitHub Pages,
 you may try yhe CDN hosted by CloudFlare:
 
 ```bash
-pip install <package> --extra-index-url https://pypy.kmtea.eu/wheels-cn.html
+pip install <package> --find-links https://pypy.kmtea.eu/wheels-cn.html
 ```
 
 ## Other info

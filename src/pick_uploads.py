@@ -16,6 +16,9 @@ VERS = ['3.7', '3.8', '3.9', '3.10']
 
 if __name__ == '__main__':
     os.makedirs(TO_UPLOAD, exist_ok=True)
+    os.makedirs(os.path.join(TO_UPLOAD, 'nomany'), exist_ok=True)
+    for ver in VERS:
+        os.makedirs(os.path.join(TO_UPLOAD, ver), exist_ok=True)
 
     with open(CURRENT_INDEX, 'r', encoding='utf-8') as f:
         current_index = f.read()
@@ -40,15 +43,17 @@ if __name__ == '__main__':
                 if pkg_name in ver_wheel and pkg_ver in ver_wheel and pkg_python in ver_wheel:
                     if ver_wheel not in current_index:
                         done = True
+                        shutil.move(
+                            os.path.join(LINUX_WHEELS_MANY_ORIGIN_DIR, wheel),
+                            os.path.join(TO_UPLOAD, ver, wheel)
+                        )
                         break
         if not done:
             shutil.move(
                 os.path.join(LINUX_WHEELS_MANY_ORIGIN_DIR, wheel),
-                os.path.join(TO_UPLOAD, wheel)
+                os.path.join(TO_UPLOAD, 'nomany', wheel)
             )
 
-    for ver in VERS:
-        os.makedirs(os.path.join(TO_UPLOAD, ver), exist_ok=True)
     for wheel in tqdm(os.listdir(os.path.join(TO_UPLOAD, 'nomany'))):
         for ver in VERS:
             if f'pp{ver.replace(".", "")}-pypy{ver.replace(".", "")}' in wheel:

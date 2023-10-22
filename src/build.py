@@ -1,4 +1,5 @@
 import os
+import sys
 import argparse
 import subprocess
 from config import *
@@ -45,10 +46,12 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, only: st
         if since:
             index = packages.index(since)
             if index > 0:
-                packages = packages[index - 1:]
+                packages = ['NotARealPackage'] * (index - 1) + packages[index - 1:]
 
     pbar = tqdm(packages)
     for pkg in pbar:
+        if pkg == 'NotARealPackage':
+            continue
         pbar.set_description(f'S: {len(success)}, F: {len(failed)}, C: {pkg}')
         flags = ''
         if only:
@@ -59,9 +62,7 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, only: st
                    f'--find-links https://pypy.kmtea.eu/wheels.html')
         try:
             result = subprocess.run(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            if f'Successfully installed {pkg}' in (result.stdout.decode('utf-8') + result.stdout.decode('utf-8')):
-                success.append(pkg)
-            elif f'Requirement already satisfied: {pkg}' in (result.stdout.decode('utf-8') + result.stdout.decode('utf-8')):
+            if ('error' not in result.stderr.decode('utf-8').lower()) or (f'Successfully installed {pkg}'.lower() in result.stdout.decode('utf-8').lower()):
                 success.append(pkg)
             else:
                 failed.append(pkg)
@@ -71,6 +72,12 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, only: st
                 print('########## ERROR ##########')
                 print(result.stderr.decode('utf-8'))
                 print('##########  END  ##########')
+        except KeyboardInterrupt:
+            print('Exiting...')
+            print(f'{success=}')
+            print(f'{failed=}')
+            print(f'{pkg=}')
+            sys.exit(1)
         except Exception as e:
             failed.append(pkg)
             print(e)

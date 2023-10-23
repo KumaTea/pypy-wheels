@@ -73,3 +73,35 @@ def copy_wheels(dst: str):
 
     print(f'Copied {len(copied_files)} wheels')
     return copied_files
+
+
+def get_linux_dup():
+    whl_path = '../whl/wheels.html'
+    if os.name == 'nt':
+        whl_path = './whl/wheels.html'
+    pkgs = {}
+    with open(whl_path, 'r', encoding='utf-8') as f:
+        whl_html = f.read()
+
+    for line in whl_html.split('\n'):
+        if '<a' in line:
+            open_tag_end = line.find('>')
+            close_tag_start = line.find('</a>')
+            pkg_filename = line[open_tag_end+1:close_tag_start]
+
+            pkg_name = pkg_filename.split('-')[0]
+            pkg_ver = pkg_filename.split('-')[1]
+            pkg_pyver = pkg_filename.split('-')[2]
+
+            if f'{pkg_name}-{pkg_ver}-{pkg_pyver}' not in pkgs:
+                pkgs[f'{pkg_name}-{pkg_ver}-{pkg_pyver}'] = []
+            pkgs[f'{pkg_name}-{pkg_ver}-{pkg_pyver}'].append(pkg_filename)
+
+    for pkg in pkgs:
+        if len(pkgs[pkg]) > 1:
+            archs = []
+            for filename in pkgs[pkg]:
+                arch = filename.split('_')[-1].split('.')[0]
+                archs.append(arch)
+            if len(archs) > 1 and len(list(set(archs))) == 1:
+                print(pkg, pkgs[pkg])

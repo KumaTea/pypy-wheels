@@ -26,12 +26,12 @@ if __name__ == '__main__':
     none_wheels = os.listdir(LINUX_WHEELS_NONE_DIR)
     for wheel in tqdm(none_wheels):
         if wheel not in current_index:
-            shutil.move(
+            shutil.copy(
                 os.path.join(LINUX_WHEELS_NONE_DIR, wheel),
-                os.path.join(TO_UPLOAD, wheel)
+                os.path.join(TO_UPLOAD, 'nomany', wheel)
             )
 
-    origin_wheels = os.listdir(LINUX_WHEELS_MANY_ORIGIN_DIR)
+    origin_wheels = os.listdir(LINUX_WHEELS_MANY_ORIGIN_DIR)  # .../many/done/
     for wheel in tqdm(origin_wheels):
         done = False
         pkg_name = wheel.split('-')[0]
@@ -40,20 +40,21 @@ if __name__ == '__main__':
         for ver in VERS:
             ver_wheels = os.listdir(os.path.join(LINUX_WHEELS_MANY_DIR, ver))
             for ver_wheel in ver_wheels:
-                if pkg_name in ver_wheel and pkg_ver in ver_wheel and pkg_python in ver_wheel:
+                if pkg_name in ver_wheel and pkg_ver in ver_wheel and pkg_python in ver_wheel and 'manylinux' in ver_wheel:
                     if ver_wheel not in current_index:
                         done = True
-                        shutil.move(
-                            os.path.join(LINUX_WHEELS_MANY_ORIGIN_DIR, wheel),
-                            os.path.join(TO_UPLOAD, ver, wheel)
+                        shutil.copy(
+                            os.path.join(LINUX_WHEELS_MANY_DIR, ver, ver_wheel),
+                            os.path.join(TO_UPLOAD, ver, ver_wheel)
                         )
                         break
         if not done:
-            shutil.move(
+            shutil.copy(
                 os.path.join(LINUX_WHEELS_MANY_ORIGIN_DIR, wheel),
                 os.path.join(TO_UPLOAD, 'nomany', wheel)
             )
 
+    # rearrange by version
     for wheel in tqdm(os.listdir(os.path.join(TO_UPLOAD, 'nomany'))):
         for ver in VERS:
             if f'pp{ver.replace(".", "")}-pypy{ver.replace(".", "")}' in wheel:

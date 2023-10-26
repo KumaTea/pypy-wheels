@@ -9,11 +9,12 @@ from tqdm import tqdm
 arg = argparse.ArgumentParser()
 arg.add_argument('-V', '--ver', help='pypy version')
 arg.add_argument('-s', '--since', help='start from this package')
+arg.add_argument('-u', '--until', help='end at this package')
 arg.add_argument('-O', '--only', help='only build this package')
 args = arg.parse_args()
 
 
-def build(ver: str, py_path: str, plat: str = 'win', since: str = None, only: str = None):
+def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: str = None, only: str = None):
     if ver not in build_versions:
         print(f'pypy {ver} not found')
         exit(1)
@@ -46,7 +47,15 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, only: st
         if since:
             index = packages.index(since)
             if index > 0:
-                packages = ['NotARealPackage'] * (index - 1) + packages[index - 1:]
+                packages = ['NotARealPackage'] * index + packages[index:]
+
+        if until:
+            if type(until) is int:
+                until_index = until
+            else:
+                until_index = packages.index(until)
+        else:
+            until_index = len(packages)
 
     pbar = tqdm(packages)
     for pkg in pbar:
@@ -72,6 +81,10 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, only: st
                 print('########## ERROR ##########')
                 print(result.stderr.decode('utf-8'))
                 print('##########  END  ##########')
+
+            current_index = packages.index(pkg)
+            if current_index >= until_index:
+                raise KeyboardInterrupt
         except KeyboardInterrupt:
             print('Exiting...')
             print(f'{success=}')

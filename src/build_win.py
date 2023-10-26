@@ -15,7 +15,7 @@ def check_pypy(ver: str):
         prepare(ver)
 
 
-def build_win(ver: str = None, since: str = None, only: str = None):
+def build_win(ver: str = None, since: str = None, until: str = None, only: str = None):
     if not ver:
         ver = args.ver
     if ver not in build_versions:
@@ -31,6 +31,7 @@ def build_win(ver: str = None, since: str = None, only: str = None):
         py_path=py_path,
         plat=plat,
         since=since,
+        until=until,
         only=only
     )
 
@@ -56,5 +57,6 @@ if __name__ == '__main__':
     build_win(
         ver=args.ver,
         since=args.since,
+        until=args.until,
         only=args.only
     )

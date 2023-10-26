@@ -102,6 +102,8 @@ def get_linux_dup():
             archs = []
             for filename in pkgs[pkg]:
                 arch = filename.split('_')[-1].split('.')[0]
-                archs.append(arch)
+                plat = filename.split('_')[-2].split('-')[-1]
+                if 'linux' in plat:
+                    archs.append(arch)
             if len(archs) > 1 and len(list(set(archs))) == 1:
                 print(pkg, pkgs[pkg])

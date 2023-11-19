@@ -1,31 +1,47 @@
+import os
+import json
 import requests
+from config import *
 from tqdm import tqdm
 
 
-author = 'KumaTea'
-project = 'pypy-wheels'
-whl_dir = '../whl'
-whl_file = 'wheels.html'
-gh_rl_api = 'https://api.github.com/repos/{author}/{project}/releases'
+def save_release(project: str, tag: str, data):
+    with open(f'{whl_dir}/data/{project}-{tag}.json', 'w', encoding='utf-8') as json_file:
+        json.dump(data, json_file)
 
 
-def get_gh_rl(a, p):
+def load_release(filename: str):
+    with open(f'{whl_dir}/data/{filename}', 'r', encoding='utf-8') as json_file:
+        return json.load(json_file)
+
+
+def get_gh_rl(author, project):
+    os.makedirs(f'{whl_dir}/data', exist_ok=True)
     print('Fetching GitHub releases...')
-    assets = []
-    result_raw = requests.get(gh_rl_api.format(author=a, project=p)).json()
+    result_raw = requests.get(gh_rl_api.format(author=author, project=project)).json()
     for release in result_raw:
         if release['assets']:
-            for binary in tqdm(release['assets']):
-                if 'whl' in binary['name']:
-                    assets.append({
-                        'name': binary['name'],
-                        'url': binary['browser_download_url']
-                    })
+            save_release(project, release['tag_name'], release)
+    return result_raw
+
+
+def get_assets():
+    assets = []
+    releases = os.listdir(f'{whl_dir}/data')
+    for filename in tqdm(releases):
+        release = load_release(filename)
+        for binary in tqdm(release['assets']):
+            if 'whl' in binary['name']:
+                assets.append({
+                    'name': binary['name'],
+                    'url': binary['browser_download_url']
+                })
     return assets
 
 
 def gen_index():
-    rl_list = get_gh_rl(author, project)
+    get_gh_rl(AUTHOR, PROJ)
+    rl_list = get_assets()
     rl_html = ''
 
     # sort by filename

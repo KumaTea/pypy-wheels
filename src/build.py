@@ -50,8 +50,8 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
                 packages = ['NotARealPackage'] * index + packages[index:]
 
         if until:
-            if type(until) is int:
-                until_index = until
+            if until.isdigit():
+                until_index = int(until)
             else:
                 until_index = packages.index(until)
         else:
@@ -68,7 +68,7 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
         command = (f'{py_path} -m '
                    f'pip install -U {flags} '
                    f'{pkg} '
-                   f'--find-links https://pypy.kmtea.eu/wheels.html')
+                   f'--extra-index-url https://pypy.kmtea.eu/simple')
         try:
             result = subprocess.run(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             if ('error' not in result.stderr.decode('utf-8').lower()) or (f'Successfully installed {pkg}'.lower() in result.stdout.decode('utf-8').lower()):
@@ -124,3 +124,4 @@ def uninst_all(ver: str, py_path: str, plat: str = 'win'):
 
     if os.path.exists(f'freeze.{ver}.txt'):
         os.remove(f'freeze.{ver}.txt')
+

@@ -26,7 +26,16 @@ def gen_index():
                 pkgs[pkg_name] = []
             pkgs[pkg_name].append((pkg_filename, line))
 
+    # fix scipy and SciPy
+    lower_pkgs = [pkg for pkg in pkgs if pkg == pkg.lower()]
+    diff_pkgs = list(set(pkgs) - set(lower_pkgs))
+    dup_pkgs = [pkg for pkg in diff_pkgs if pkg.lower() in pkgs]
+    for pkg in dup_pkgs:
+        pkgs[pkg].extend(pkgs[pkg.lower()])
+        pkgs[pkg.lower()] = pkgs[pkg]  # unix is case sensitive
+
     for pkg in pkgs:
+        pkgs[pkg].sort(key=lambda x: x[0])
         os.makedirs(f'{index_dir}/{pkg}', exist_ok=True)
         with open(f'{index_dir}/{pkg}/index.html', 'w', encoding='utf-8') as f:
             f.write('<!DOCTYPE html>\n<html><body>\n')

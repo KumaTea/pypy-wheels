@@ -29,6 +29,7 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
     if only:
         print(f'Building {only}...')
         packages = [only]
+        until_index = 1
     else:
         with open('../packages.txt', 'r') as f:
             packages = f.read().splitlines()
@@ -58,6 +59,7 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
             until_index = len(packages)
 
     pbar = tqdm(packages)
+    count = 0
     for pkg in pbar:
         if pkg == 'NotARealPackage':
             continue
@@ -73,6 +75,7 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
             result = subprocess.run(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             if ('error' not in result.stderr.decode('utf-8').lower()) or (f'Successfully installed {pkg}'.lower() in result.stdout.decode('utf-8').lower()):
                 success.append(pkg)
+                count += 1
             else:
                 failed.append(pkg)
                 print('######### FAILURE #########')
@@ -85,6 +88,10 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
             current_index = packages.index(pkg)
             if current_index >= until_index:
                 raise KeyboardInterrupt
+
+            if count >= 100:
+                print('Built 100 packages. Uninstall all.')
+                uninst_all(ver, py_path, plat)
         except KeyboardInterrupt:
             print('Exiting...')
             print(f'{success=}')
@@ -94,6 +101,9 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
         except Exception as e:
             failed.append(pkg)
             print(e)
+        finally:
+            print('Cleanup...')
+            uninst_all(ver, py_path, plat)
 
     print(f'Success: {len(success)}, Failed: {len(failed)}')
     return success, failed
@@ -106,16 +116,15 @@ def uninst_all(ver: str, py_path: str, plat: str = 'win'):
         r = subprocess.run(freeze_cmd.split(), stdout=subprocess.PIPE)
         pkgs = r.stdout.decode('utf-8').splitlines()
         uninst_cmd = f'{py_path} -m pip uninstall -y'
-    else:
-        uninst_cmd = f'{py_path} -m pip freeze | xargz {py_path} -m pip uninstall -y'
 
-    if plat == 'win':
         for pkg in tqdm(pkgs):
             p = subprocess.run(f'{uninst_cmd} {pkg}'.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             if p.returncode != 0:
                 print(p.stdout.decode('utf-8'))
                 print(p.stderr.decode('utf-8'))
     else:
+        uninst_cmd = f'{py_path} -m pip freeze | xargz {py_path} -m pip uninstall -y'
+
         p = subprocess.Popen(uninst_cmd.split(), stdout=subprocess.PIPE)
         for line in iter(p.stdout.readline, b''):
             print(line.decode('utf-8').strip())
@@ -124,4 +133,3 @@ def uninst_all(ver: str, py_path: str, plat: str = 'win'):
 
     if os.path.exists(f'freeze.{ver}.txt'):
         os.remove(f'freeze.{ver}.txt')
-

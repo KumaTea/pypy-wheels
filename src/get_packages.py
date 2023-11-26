@@ -7,10 +7,6 @@ import requests
 
 
 DATA_URL = 'https://hugovk.github.io/top-pypi-packages/top-pypi-packages-30-days.min.json'
-"""
-{"last_update":"2023-10-01 08:13:22","query":{"bytes_billed":665253314560,"bytes_processed":665253058751,"cached":false,"estimated_cost":"3.03"},"rows":[{"download_count":825947200,"project":"boto3"},{"download_count":395719124,"project":"urllib3"},{"download_count":354781524,"project":"botocore"},{"download_count":325119737,"project":"setuptools"},{"download_count":321150859,"project":"requests"},{"download_count":296553463,"project":"typing-extensions"},{"download_count":279118230,"project":"certifi"},{"download_count":277662353,"project":"charset-normalizer"},{"download_count":243682486,"project":"s3transfer"},{"download_count":228781209,"project":"wheel"},{"download_count":225238452,"project":"cryptography"},{"download_count":206083246,"project":"python-dateutil"},...
-"""
-
 
 packages_file = '../packages.txt'
 linux_packages_file = '../pkgs_linux.txt'
@@ -26,7 +22,8 @@ excluded_packages = [
     'aws',
     'azure',
     'google',
-    'gcloud'
+    'gcloud',
+    'boto'
 ]
 
 linux_only_packages = [

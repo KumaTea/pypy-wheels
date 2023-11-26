@@ -92,6 +92,7 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
             if count >= 100:
                 print('Built 100 packages. Uninstall all.')
                 uninst_all(ver, py_path, plat)
+                count = 0
         except KeyboardInterrupt:
             print('Exiting...')
             print(f'{success=}')
@@ -101,9 +102,9 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
         except Exception as e:
             failed.append(pkg)
             print(e)
-        finally:
-            print('Cleanup...')
-            uninst_all(ver, py_path, plat)
+
+    # print('Cleanup...')
+    # uninst_all(ver, py_path, plat)
 
     print(f'Success: {len(success)}, Failed: {len(failed)}')
     return success, failed
@@ -123,9 +124,9 @@ def uninst_all(ver: str, py_path: str, plat: str = 'win'):
                 print(p.stdout.decode('utf-8'))
                 print(p.stderr.decode('utf-8'))
     else:
-        uninst_cmd = f'{py_path} -m pip freeze | xargz {py_path} -m pip uninstall -y'
+        uninst_cmd = f'{py_path} -m pip freeze | xargs -n 1 {py_path} -m pip uninstall -y'
 
-        p = subprocess.Popen(uninst_cmd.split(), stdout=subprocess.PIPE)
+        p = subprocess.Popen(uninst_cmd, stdout=subprocess.PIPE, shell=True)
         for line in iter(p.stdout.readline, b''):
             print(line.decode('utf-8').strip())
         p.stdout.close()

@@ -1,9 +1,11 @@
 # project
+import os
 
 AUTHOR = 'KumaTea'
 PROJ = 'pypy-wheels'
 whl_dir = '../whl'
 whl_file = 'wheels.html'
+sha_file = 'sha256sums.json'
 gh_rl_api = 'https://api.github.com/repos/{author}/{project}/releases'
 
 
@@ -20,7 +22,9 @@ WIN_WHEEL_DIR = 'E:\\Cache\\pypy\\whl'
 # linux
 # docker, so root
 
-LINUX_WORK_DIR = '/root/pypy-wheels'
-LINUX_WHEEL_DIR = '/root/pypy-wheels/whl'
-LINUX_MANY_DIR = '/root/pypy-wheels/whl/many'
-
+if os.name == 'nt':
+    LINUX_WORK_DIR = 'E:\\Cache\\linux'
+else:
+    LINUX_WORK_DIR = '/home/kuma/pypy'
+LINUX_WHEEL_DIR = f'{LINUX_WORK_DIR}/whl'
+LINUX_MANY_DIR = f'{LINUX_WORK_DIR}/whl/many'

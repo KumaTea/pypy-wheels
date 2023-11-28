@@ -5,7 +5,7 @@ from prepare_win import prepare
 
 
 def check_pypy(ver: str):
-    command = f'{WIN_WORK_DIR}\\{ver}\\python.exe -m pip list'
+    command = f'{WIN_WORK_DIR}\\{ver}\\python.exe -V'
     try:
         result = subprocess.run(command.split(), stdout=subprocess.PIPE)
         if result:

@@ -1,9 +1,10 @@
-import os
 import sys
 import argparse
+import selectors
 import subprocess
 from config import *
 from tqdm import tqdm
+from tools import popen_reader
 
 
 arg = argparse.ArgumentParser()
@@ -12,6 +13,79 @@ arg.add_argument('-s', '--since', help='start from this package')
 arg.add_argument('-u', '--until', help='end at this package')
 arg.add_argument('-O', '--only', help='only build this package')
 args = arg.parse_args()
+
+PYPI_MIRROR = 'mirrors.sustech.edu.cn'
+PROJ_URL = 'github.com/KumaTea/pypy-wheels'
+PROJ_URL_LOWER = PROJ_URL.lower()
+
+
+def is_success_build(output: str, error: str = None):
+    return any([
+        'error' not in error.lower(),
+        'successfully installed' in output.lower(),
+        'requirement already satisfied' in output.lower()
+    ])
+
+
+def is_downloading_whl(output: str, pkg_name: str):
+    """
+    Downloading whl from this project's release
+    means that the package has been built successfully, no need to continue.
+
+    Why not official mirror?
+    Consider oldest-supported-numpy.
+    """
+    output = output.lower()
+    pkg_name = pkg_name.lower().replace('-', '_')
+    for line in output.splitlines():
+        if all([
+            PROJ_URL_LOWER in line,
+            pkg_name in line,
+            '.whl' in line,
+        ]):
+            return line
+    return False
+
+
+def building_reader(pkg_name: str, p: subprocess.Popen, pbar: tqdm = None) -> tuple:
+    if os.name == 'nt':
+        return popen_reader(p, pbar)
+
+    sel = selectors.DefaultSelector()
+    sel.register(p.stdout, selectors.EVENT_READ)
+    sel.register(p.stderr, selectors.EVENT_READ)
+    result = ''
+    error = ''
+
+    if pbar:
+        print_func = pbar.write
+    else:
+        print_func = print
+
+    done = False
+    while not done:
+        for key, _ in sel.select():
+            data = key.fileobj.read1().decode()
+            if not data:
+                done = True
+                break
+            if key.fileobj is p.stdout:
+                result += data
+                print_func(data, end="")
+            else:
+                error += data
+                print_func(data, end="", file=sys.stderr)
+
+            if dl_line := is_downloading_whl(result, pkg_name):
+                print_func(f'🎉🎉🎉 Package {pkg_name} skipped 🎉🎉🎉\n')
+                print_func('Because I found this:\n')
+                print_func(dl_line)
+                # kill the process
+                p.terminate()
+                return result, error
+
+    p.wait()
+    return result, error
 
 
 def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: str = None, only: str = None):
@@ -58,6 +132,11 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
         else:
             until_index = len(packages)
 
+        # init clean
+        # if not only:
+        if input('Init clean? (y/n) ') == 'y':
+            uninst_all(ver, py_path, plat)
+
     pbar = tqdm(packages)
     count = 0
     for pkg in pbar:
@@ -68,49 +147,55 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
         if only:
             flags = '--force-reinstall'
         command = (f'{py_path} -m '
-                   f'pip install -U {flags} '
+                   f'pip install -U -v {flags} '
                    f'{pkg} '
                    f'--extra-index-url https://pypy.kmtea.eu/simple')
         try:
-            result = subprocess.run(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            if ('error' not in result.stderr.decode('utf-8').lower()) or (f'Successfully installed {pkg}'.lower() in result.stdout.decode('utf-8').lower()):
+            p = subprocess.Popen(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            result, error = building_reader(pkg, p, pbar)
+
+            if is_success_build(result, error):
+                # pbar.write(result)
                 success.append(pkg)
                 count += 1
             else:
                 failed.append(pkg)
-                print('######### FAILURE #########')
-                print(f'{pkg=}')
-                print(result.stdout.decode('utf-8'))
-                print('########## ERROR ##########')
-                print(result.stderr.decode('utf-8'))
-                print('##########  END  ##########')
+                # pbar.write(result)
+                pbar.write('######### FAILURE #########')
+                pbar.write(f'{pkg=}')
+                pbar.write('########## ERROR ##########')
+                # pbar.write(error)
+                pbar.write('##########  END  ##########')
 
             current_index = packages.index(pkg)
             if current_index >= until_index:
                 raise KeyboardInterrupt
 
             if count >= 100:
-                print('Built 100 packages. Uninstall all.')
-                uninst_all(ver, py_path, plat)
+                pbar.write('Built 100 packages. Uninstall all.')
                 count = 0
+                uninst_all(ver, py_path, plat, pbar)
         except KeyboardInterrupt:
-            print('Exiting...')
-            print(f'{success=}')
-            print(f'{failed=}')
-            print(f'{pkg=}')
+            pbar.write('Exiting...')
+            pbar.write(f'{success=}')
+            pbar.write(f'{failed=}')
+            pbar.write(f'{pkg=}')
             sys.exit(1)
         except Exception as e:
             failed.append(pkg)
-            print(e)
+            pbar.write(str(e))
 
-    # print('Cleanup...')
+    # pbar.write('Cleanup...')
     # uninst_all(ver, py_path, plat)
 
-    print(f'Success: {len(success)}, Failed: {len(failed)}')
+    pbar.write(f'Success: {len(success)}, Failed: {len(failed)}')
     return success, failed
 
 
-def uninst_all(ver: str, py_path: str, plat: str = 'win'):
+NO_UNINST = ['pip', 'setuptools', 'wheel']
+
+
+def uninst_all(ver: str, py_path: str, plat: str = 'win', upper_pbar: tqdm = None):
     # uninstall all packages
     if plat == 'win':
         freeze_cmd = f'{py_path} -m pip freeze'
@@ -118,19 +203,24 @@ def uninst_all(ver: str, py_path: str, plat: str = 'win'):
         pkgs = r.stdout.decode('utf-8').splitlines()
         uninst_cmd = f'{py_path} -m pip uninstall -y'
 
-        for pkg in tqdm(pkgs):
-            p = subprocess.run(f'{uninst_cmd} {pkg}'.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            if p.returncode != 0:
-                print(p.stdout.decode('utf-8'))
-                print(p.stderr.decode('utf-8'))
+        pbar = tqdm(pkgs)
+        for pkg in pbar:
+            if any([i in pkg for i in NO_UNINST]):
+                continue
+            p = subprocess.Popen(f'{uninst_cmd} {pkg}'.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            popen_reader(p, pbar)
     else:
         uninst_cmd = f'{py_path} -m pip freeze | xargs -n 1 {py_path} -m pip uninstall -y'
 
-        p = subprocess.Popen(uninst_cmd, stdout=subprocess.PIPE, shell=True)
-        for line in iter(p.stdout.readline, b''):
-            print(line.decode('utf-8').strip())
-        p.stdout.close()
-        p.wait()
+        p = subprocess.Popen(uninst_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+        popen_reader(p, upper_pbar)
 
     if os.path.exists(f'freeze.{ver}.txt'):
         os.remove(f'freeze.{ver}.txt')
+
+    # ensure tools
+    p = subprocess.Popen(
+        f'{py_path} -m pip install pip setuptools wheel'.split(),
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    )
+    popen_reader(p)

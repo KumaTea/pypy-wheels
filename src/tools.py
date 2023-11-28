@@ -1,5 +1,6 @@
-import os
+import sys
 import shutil
+import selectors
 import subprocess
 from config import *
 from tqdm import tqdm
@@ -107,3 +108,55 @@ def get_linux_dup():
                     archs.append(arch)
             if len(archs) > 1 and len(list(set(archs))) == 1:
                 print(pkg, pkgs[pkg])
+
+
+def popen_reader_linux(p: subprocess.Popen, pbar: tqdm = None) -> tuple:
+    sel = selectors.DefaultSelector()
+    sel.register(p.stdout, selectors.EVENT_READ)
+    sel.register(p.stderr, selectors.EVENT_READ)
+    result = ''
+    error = ''
+
+    if pbar:
+        print_func = pbar.write
+    else:
+        print_func = print
+
+    done = False
+    while not done:
+        for key, _ in sel.select():
+            data = key.fileobj.read1().decode()
+            if not data:
+                done = True
+                break
+            if key.fileobj is p.stdout:
+                result += data
+                print_func(data, end="")
+            else:
+                error += data
+                print_func(data, end="", file=sys.stderr)
+
+    p.wait()
+    return result, error
+
+
+def popen_reader_win(p: subprocess.Popen, pbar: tqdm = None) -> tuple:
+    if pbar:
+        print_func = pbar.write
+    else:
+        print_func = print
+
+    result, error = p.communicate()
+    result = result.decode()
+    error = error.decode()
+    print_func(result, end="")
+    print_func(error, end="", file=sys.stderr)
+
+    return result, error
+
+
+def popen_reader(p: subprocess.Popen, pbar: tqdm = None) -> tuple:
+    if os.name == 'nt':
+        return popen_reader_win(p, pbar)
+    else:
+        return popen_reader_linux(p, pbar)

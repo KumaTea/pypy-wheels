@@ -1,5 +1,6 @@
 import os
 import shutil
+import hashlib
 from tqdm import tqdm
 
 
@@ -14,15 +15,15 @@ TO_UPLOAD = r'E:\Cache\linux\whl\upload'
 
 VERS = ['3.7', '3.8', '3.9', '3.10']
 
-if __name__ == '__main__':
+
+def mkdirs():
     os.makedirs(TO_UPLOAD, exist_ok=True)
     os.makedirs(os.path.join(TO_UPLOAD, 'nomany'), exist_ok=True)
-    for ver in VERS:
-        os.makedirs(os.path.join(TO_UPLOAD, ver), exist_ok=True)
+    for v in VERS:
+        os.makedirs(os.path.join(TO_UPLOAD, v), exist_ok=True)
 
-    with open(CURRENT_INDEX, 'r', encoding='utf-8') as f:
-        current_index = f.read()
 
+def copy_wheels(current_index):
     none_wheels = os.listdir(LINUX_WHEELS_NONE_DIR)
     for wheel in tqdm(none_wheels):
         if wheel not in current_index:
@@ -63,3 +64,12 @@ if __name__ == '__main__':
                     os.path.join(TO_UPLOAD, ver, wheel)
                 )
                 break
+
+
+if __name__ == '__main__':
+    mkdirs()
+
+    with open(CURRENT_INDEX, 'r', encoding='utf-8') as f:
+        index = f.read()
+
+    copy_wheels(index)

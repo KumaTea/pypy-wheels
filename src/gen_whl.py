@@ -1,5 +1,6 @@
 import json
 import hashlib
+import logging
 import requests
 from config import *
 from tqdm import tqdm
@@ -67,6 +68,17 @@ def get_gh_rl(author, project):
     return result_raw
 
 
+def check_dup(assets: list):
+    assets_dict = {}
+    for asset in assets:
+        assets_dict[asset['name']] = assets_dict.get(asset['name'], []) + [asset['url']]
+    for name, urls in assets_dict.items():
+        if len(urls) > 1:
+            logging.warning(f'Duplicated assets: {name}')
+            for url in urls:
+                logging.warning(f'\tURL: {url}')
+
+
 def get_assets():
     assets = []
     releases = os.listdir(f'{whl_dir}/data')
@@ -74,18 +86,20 @@ def get_assets():
         releases.remove('sha256sums.json')
     for filename in tqdm(releases):
         release = load_release(filename)
-        for binary in tqdm(release['assets']):
+        for binary in release['assets']:
             if 'whl' in binary['name']:
                 assets.append({
                     'name': binary['name'],
                     'url': add_sha256_to_url(binary['name'], binary['browser_download_url'])
                 })
+
     return assets
 
 
 def gen_index():
     get_gh_rl(AUTHOR, PROJ)
     rl_list = get_assets()
+    check_dup(rl_list)
     rl_html = ''
 
     # sort by filename

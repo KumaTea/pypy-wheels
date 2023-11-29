@@ -17,6 +17,8 @@ args = arg.parse_args()
 PYPI_MIRROR = 'mirrors.sustech.edu.cn'
 PROJ_URL = 'github.com/KumaTea/pypy-wheels'
 PROJ_URL_LOWER = PROJ_URL.lower()
+EXTRA_INDEX_URL = 'https://pypy.kmtea.eu/simple'
+EXTRA_CDN = 'https://pypy.kmtea.eu/cdn'
 
 
 def is_success_build(pkg_name: str, output: str, error: str = None):
@@ -161,7 +163,7 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
         command = (f'{py_path} -m '
                    f'pip install -U -v {flags} '
                    f'{pkg} '
-                   f'--extra-index-url https://pypy.kmtea.eu/simple')
+                   f'--extra-index-url {EXTRA_CDN}')
         try:
             p = subprocess.Popen(
                 command.split(),

@@ -70,6 +70,8 @@ def get_gh_rl(author, project):
 def get_assets():
     assets = []
     releases = os.listdir(f'{whl_dir}/data')
+    if 'sha256sums.json' in releases:
+        releases.remove('sha256sums.json')
     for filename in tqdm(releases):
         release = load_release(filename)
         for binary in tqdm(release['assets']):

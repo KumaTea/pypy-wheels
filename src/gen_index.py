@@ -1,5 +1,7 @@
 import os
 import shutil
+import logging
+import requests
 
 
 whl_path = './whl/wheels.html'
@@ -8,6 +10,16 @@ cdn_index_dir = './whl/cdn'
 if os.name == 'nt':
     whl_path = '.' + whl_path
     index_dir = '.' + index_dir
+PYPI_INDEX = 'https://pypi.org/simple'
+
+
+def check_official(pkg_name: str) -> bool:
+    official_index_url = f'{PYPI_INDEX}/{pkg_name}/'
+    r = requests.get(official_index_url)
+    if r.status_code == 200:
+        return True
+    logging.warning(f'Package {pkg_name} not found on official PyPI!!!')
+    return False
 
 
 def gen_index():
@@ -23,6 +35,8 @@ def gen_index():
             pkg_filename = line[a_tag_open_end + len('">'):a_tag_close]
             # pkg_url = line[a_tag_open_start + len('<a href="'):a_tag_open_end]
             pkg_name = pkg_filename.split('-')[0]
+            pkg_name = pkg_name.replace('_', '-')
+            check_official(pkg_name)
 
             if pkg_name.lower() not in pkgs:
                 pkgs[pkg_name.lower()] = []

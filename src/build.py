@@ -19,12 +19,19 @@ PROJ_URL = 'github.com/KumaTea/pypy-wheels'
 PROJ_URL_LOWER = PROJ_URL.lower()
 
 
-def is_success_build(output: str, error: str = None):
-    return any([
-        'error' not in error.lower(),
-        'successfully installed' in output.lower(),
-        'requirement already satisfied' in output.lower()
-    ])
+def is_success_build(pkg_name: str, output: str, error: str = None):
+    pkg_name = pkg_name.lower()
+    output = output.lower()
+    if error:
+        error = error.lower()
+    for line in output.splitlines():
+        if any([
+            error is not None and 'error' not in error,
+            'successfully installed' in line and pkg_name in line,
+            'requirement already satisfied' in line and pkg_name in line,
+        ]):
+            return True
+    return False
 
 
 def is_downloading_whl(output: str, pkg_name: str):
@@ -39,6 +46,7 @@ def is_downloading_whl(output: str, pkg_name: str):
     pkg_name = pkg_name.lower().replace('-', '_')
     for line in output.splitlines():
         if all([
+            # downloading or cached
             PROJ_URL_LOWER in line,
             pkg_name in line,
             '.whl' in line,
@@ -120,7 +128,10 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
 
         # packages = list(set(packages))
         if since:
-            index = packages.index(since)
+            if since.isdigit():
+                index = int(since)
+            else:
+                index = packages.index(since)
             if index > 0:
                 packages = ['NotARealPackage'] * index + packages[index:]
 
@@ -137,6 +148,7 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
         if input('Init clean? (y/n) ') == 'y':
             uninst_all(ver, py_path, plat)
 
+    env = os.environ
     pbar = tqdm(packages)
     count = 0
     for pkg in pbar:
@@ -151,10 +163,14 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
                    f'{pkg} '
                    f'--extra-index-url https://pypy.kmtea.eu/simple')
         try:
-            p = subprocess.Popen(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            p = subprocess.Popen(
+                command.split(),
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                env=env,  # ensure windows' Visual C++ build tools and conda env
+            )
             result, error = building_reader(pkg, p, pbar)
 
-            if is_success_build(result, error):
+            if is_success_build(pkg, result, error):
                 # pbar.write(result)
                 success.append(pkg)
                 count += 1

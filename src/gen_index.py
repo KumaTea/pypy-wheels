@@ -15,6 +15,9 @@ if os.name == 'nt':
 # official index is too smart that it redirects underscore to dash
 PYPI_INDEX = 'https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple'
 
+check_counter = 0
+c = {}
+
 
 def check_official(pkg_name: str) -> bool:
     official_index_url = f'{PYPI_INDEX}/{pkg_name}/'
@@ -22,7 +25,10 @@ def check_official(pkg_name: str) -> bool:
         with urlopen(official_index_url) as response:
             is_200 = response.getcode() == 200
         if is_200:
-            print('.', end='')  # wake GitHub Actions up
+            global check_counter
+            check_counter += 1
+            if check_counter % 100 == 0:
+                print(f'Checked {check_counter} packages...')
             return True
         else:
             logging.warning(f'Package {pkg_name} not found ({response.getcode()}) on official PyPI!!!')
@@ -45,14 +51,18 @@ def gen_index():
             pkg_filename = line[a_tag_open_end + len('">'):a_tag_close]
             # pkg_url = line[a_tag_open_start + len('<a href="'):a_tag_open_end]
             pkg_name = pkg_filename.split('-')[0]
-            pkg_name = pkg_name.replace('_', '-')
-            check_official(pkg_name)
 
-            if pkg_name.lower() not in pkgs:
-                pkgs[pkg_name.lower()] = []
-            pkgs[pkg_name.lower()].append((pkg_filename, line))
+            # process package name
+            pkg_name = pkg_name.replace('_', '-')
+            pkg_name = pkg_name.replace('.', '-')
+            pkg_name = pkg_name.lower()
+
+            if pkg_name not in pkgs:
+                pkgs[pkg_name] = []
+            pkgs[pkg_name].append((pkg_filename, line))
 
     for pkg in pkgs:
+        check_official(pkg)
         pkgs[pkg].sort(key=lambda x: x[0])
         os.makedirs(f'{index_dir}/{pkg}', exist_ok=True)
         with open(f'{index_dir}/{pkg}/index.html', 'w', encoding='utf-8') as f:

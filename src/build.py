@@ -181,6 +181,9 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
                 # pbar.write(result)
                 pbar.write('######### FAILURE #########')
                 pbar.write(f'{pkg=}')
+                # if isinstance(command, list):
+                #     command = ' '.join(command)
+                pbar.write(f'{command=}')
                 pbar.write('########## ERROR ##########')
                 # pbar.write(error)
                 pbar.write('##########  END  ##########')

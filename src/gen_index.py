@@ -1,7 +1,8 @@
 import os
 import shutil
 import logging
-import requests
+from urllib.request import urlopen
+from urllib.error import HTTPError, URLError
 
 
 whl_path = './whl/wheels.html'
@@ -10,16 +11,25 @@ cdn_index_dir = './whl/cdn'
 if os.name == 'nt':
     whl_path = '.' + whl_path
     index_dir = '.' + index_dir
-PYPI_INDEX = 'https://pypi.org/simple'
+# PYPI_INDEX = 'https://pypi.org/simple'
+# official index is too smart that it redirects underscore to dash
+PYPI_INDEX = 'https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple'
 
 
 def check_official(pkg_name: str) -> bool:
     official_index_url = f'{PYPI_INDEX}/{pkg_name}/'
-    r = requests.get(official_index_url)
-    if r.status_code == 200:
-        return True
-    logging.warning(f'Package {pkg_name} not found on official PyPI!!!')
-    return False
+    try:
+        with urlopen(official_index_url) as response:
+            is_200 = response.getcode() == 200
+        if is_200:
+            print('.', end='')  # wake GitHub Actions up
+            return True
+        else:
+            logging.warning(f'Package {pkg_name} not found ({response.getcode()}) on official PyPI!!!')
+            return False
+    except (HTTPError, URLError):
+        logging.warning(f'Package {pkg_name} not found on official PyPI!!!')
+        return False
 
 
 def gen_index():

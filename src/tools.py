@@ -194,3 +194,12 @@ def popen_reader(p: subprocess.Popen, pbar: tqdm = None) -> tuple:
         return popen_reader_win(p, pbar)
     else:
         return popen_reader_linux(p, pbar)
+
+
+def get_load() -> float:
+    if os.name == 'nt':
+        return 0.0
+    else:
+        with open('/proc/loadavg', 'r', encoding='utf-8') as f:
+            load = f.read().split()[0]
+        return float(load)

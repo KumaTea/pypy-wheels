@@ -28,3 +28,5 @@ else:
     LINUX_WORK_DIR = '/home/kuma/pypy'
 LINUX_WHEEL_DIR = f'{LINUX_WORK_DIR}/whl'
 LINUX_MANY_DIR = f'{LINUX_WORK_DIR}/whl/many'
+
+LOCAL_WHL_LINK = 'http://localhost:10300'

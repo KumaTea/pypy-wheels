@@ -1,10 +1,12 @@
 import sys
+import time
 import argparse
+import requests
 import selectors
 import subprocess
 from config import *
 from tqdm import tqdm
-from tools import popen_reader
+from tools import popen_reader, get_load
 
 
 arg = argparse.ArgumentParser()
@@ -98,19 +100,7 @@ def building_reader(pkg_name: str, p: subprocess.Popen, pbar: tqdm = None) -> tu
     return result, error
 
 
-def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: str = None, only: str = None):
-    os.makedirs(f'log/{ver}', exist_ok=True)
-    if ver not in build_versions:
-        print(f'pypy {ver} not found')
-        exit(1)
-    # if 'win' in plat:
-    #     check_pypy(ver)
-
-    print(f'Building wheels for pypy {ver}...')
-    # packages = []
-    success = []
-    failed = []
-
+def gen_packages(plat: str = 'win', since: str = None, until: str = None, only: str = None):
     if only:
         print(f'Building {only}...')
         packages = [only]
@@ -146,10 +136,33 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
         else:
             until_index = len(packages)
 
-        # init clean
-        # if not only:
-        if input('Init clean? (y/n) ') == 'y':
-            uninst_all(ver, py_path, plat)
+    return packages, until_index
+
+
+def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: str = None, only: str = None):
+    os.makedirs(f'log/{ver}', exist_ok=True)
+    if ver not in build_versions:
+        print(f'pypy {ver} not found')
+        exit(1)
+
+    print(f'Building wheels for pypy {ver}...')
+    packages, until_index = gen_packages(plat, since, until, only)
+    success = []
+    failed = []
+
+    # init clean
+    if input('Init clean? (y/n) ') == 'y':
+        uninst_all(ver, py_path, plat)
+
+    use_local_flag = ''
+    r = requests.get(LOCAL_WHL_LINK)
+    if r.status_code == 200:
+        print('Local cache found!')
+        use_local_flag = f'--find-links {LOCAL_WHL_LINK}'
+
+    force_reinstall_flag = ''
+    if only:
+        force_reinstall_flag = '--force-reinstall'
 
     env = os.environ
     pbar = tqdm(packages)
@@ -158,14 +171,21 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
         if pkg == 'NotARealPackage':
             continue
         pbar.set_description(f'S: {len(success)}, F: {len(failed)}, C: {pkg}')
-        flags = ''
-        if only:
-            flags = '--force-reinstall'
-        command = (f'{py_path} -m '
-                   f'pip install -U -v {flags} '
-                   f'{pkg} '
-                   f'--extra-index-url {EXTRA_CDN}')
+        command = (
+            f'{py_path} -m '
+            f'pip install -U -v '
+            f'{force_reinstall_flag} '
+            f'{pkg} '
+            f'--extra-index-url {EXTRA_CDN} '
+            f'{use_local_flag}'
+        )
+        load = get_load()
+        while load > 4:
+            pbar.write(f'Load: {load} > 4, waiting...')
+            time.sleep(5)
+            load = get_load()
         try:
+            pbar.write(f'Now running {command}')
             p = subprocess.Popen(
                 command.split(),
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE,
@@ -209,9 +229,6 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
         except Exception as e:
             failed.append(pkg)
             pbar.write(str(e))
-
-    # pbar.write('Cleanup...')
-    # uninst_all(ver, py_path, plat)
 
     pbar.write(f'Success: {len(success)}, Failed: {len(failed)}')
     return success, failed

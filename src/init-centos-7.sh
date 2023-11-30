@@ -81,7 +81,7 @@ cd ..
 rm -rvf libpng-1.6.40
 
 # others
-yes | dnf install geos-devel hdf5-devel postgresql-devel openblas-devel arrow-devel llvm14-devel libxml2-devel libxslt-devel
+yes | dnf install geos-devel hdf5-devel postgresql-devel openblas-devel arrow-devel llvm14-devel libxml2-devel libxslt-devel unixODBC-devel
 ln -s /usr/bin/llvm-config-14 /usr/bin/llvm-config
 
 # cryptography 1

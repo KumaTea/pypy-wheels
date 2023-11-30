@@ -112,8 +112,9 @@ def gen_cdn_index():
 
 if __name__ == '__main__':
     ps = gen_index()
-    gen_cdn_index()
     if os.name == 'nt':
         from tqdm import tqdm
         for p in tqdm(ps):
             check_official(p)
+    else:
+        gen_cdn_index()

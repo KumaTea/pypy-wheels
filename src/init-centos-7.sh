@@ -4,12 +4,10 @@
 
 # ====== MIRROR ======
 
-sed -e 's|^mirrorlist=|#mirrorlist=|g' -e 's|^#baseurl=http://mirror.centos.org/centos|baseurl=https://mirrors.sustech.edu.cn/centos|g' -i.bak /etc/yum.repos.
-d/CentOS-*.repo
+sed -e 's|^mirrorlist=|#mirrorlist=|g' -e 's|^#baseurl=http://mirror.centos.org/centos|baseurl=https://mirrors.sustech.edu.cn/centos|g' -i.bak /etc/yum.repos.d/CentOS-*.repo
 yum update
 yum install -y dnf
-sed -e 's!^metalink=!#metalink=!g' -e 's!^#baseurl=!baseurl=!g' -e 's!https\?://download\.fedoraproject\.org/pub/epel!https://mirrors.sustech.edu.cn/e
-pel!g' -e 's!https\?://download\.example/pub/epel!https://mirrors.sustech.edu.cn/epel!g' -i /etc/yum.repos.d/epel*.repo
+sed -e 's!^metalink=!#metalink=!g' -e 's!^#baseurl=!baseurl=!g' -e 's!https\?://download\.fedoraproject\.org/pub/epel!https://mirrors.sustech.edu.cn/epel!g' -e 's!https\?://download\.example/pub/epel!https://mirrors.sustech.edu.cn/epel!g' -i /etc/yum.repos.d/epel*.repo
 /opt/python/cp312-cp312/bin/python3 -m pip config set global.index-url https://mirrors.sustech.edu.cn/pypi/web/simple
 
 # adduser kuma
@@ -17,7 +15,7 @@ pel!g' -e 's!https\?://download\.example/pub/epel!https://mirrors.sustech.edu.cn
 
 # ====== TOOLS ======
 
-dnf install wget nano curl sudo
+dnf install -y wget nano curl sudo
 usermod -aG wheel kuma
 echo "kuma ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/kuma
 
@@ -25,15 +23,16 @@ cd /etc/yum.repos.d/
 wget https://download.opensuse.org/repositories/shells:fish:release:3/CentOS_7/shells:fish:release:3.repo
 cd ~
 dnf update
-dnf install fish
+dnf install -y fish
 chsh -s /usr/bin/fish
 # sudo -u kuma chsh -s /usr/bin/fish
 
-mkdir -p
-
 # ====== ENV ======
 
-cat << EOF >> .config/fish/config.fish
+sudo chown -R kuma:kuma /home/kuma
+mkdir -p /root/.config/fish
+sudo -u kuma mkdir -p /home/kuma/.config/fish
+sudo -u kuma cat << EOF >> /home/kuma/.config/fish/config.fish
 if status is-interactive
     cd ~
 end
@@ -51,6 +50,7 @@ alias kuma='su kuma'
 alias sudo='/usr/bin/sudo'
 alias apt='dnf'
 EOF
+cp /home/kuma/.config/fish/config.fish .config/fish/config.fish
 
 cat << EOF >> .bashrc
 source /opt/rh/devtoolset-10/enable
@@ -81,7 +81,7 @@ cd ..
 rm -rvf libpng-1.6.40
 
 # others
-yes | dnf install geos-devel hdf5-devel postgresql-devel openblas-devel arrow-devel llvm14-devel libxml2-devel libxslt-devel unixODBC-devel
+dnf -y install geos-devel hdf5-devel postgresql-devel openblas-devel arrow-devel llvm14-devel libxml2-devel libxslt-devel unixODBC-devel
 ln -s /usr/bin/llvm-config-14 /usr/bin/llvm-config
 
 # cryptography 1
@@ -96,7 +96,6 @@ cd openssl-1.1.1w
 ./config --prefix=/usr --openssldir=/etc/ssl
 make
 make install
-ldconfig
 cd ..
 rm -rvf openssl-1.1.1w.tar.gz openssl-1.1.1w
 openssl version
@@ -108,3 +107,5 @@ wget https://github.com/KumaTea/pypy-wheels/releases/download/2311/pypy-7.3.tar.
 tar xvzf pypy-7.3.tar.gz
 mv ./usr/lib64/pypy-7.3 /usr/lib64/
 rm -rvf usr pypy-7.3.tar.gz
+
+ldconfig

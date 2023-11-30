@@ -1,4 +1,5 @@
 import hashlib
+import logging
 import requests
 from tqdm import tqdm
 from gen_whl import saved_sha256sums, save_sha256sums
@@ -26,9 +27,6 @@ def get_sha_pkgs():
 
 
 def sha_check(filename: str, url: str, pbar: tqdm):
-    if filename not in whl_html:
-        pbar.write(f'{filename} not found in wheels.html!')
-        saved_sha256sums.pop(filename)
     if saved_sha256sums[filename]['verify']:
         return True
     local_sha = saved_sha256sums[filename]['sha']
@@ -49,11 +47,19 @@ def sha_check(filename: str, url: str, pbar: tqdm):
         saved_sha256sums[filename]['verify'] = True
 
 
+def remove_obsolete():
+    for filename in saved_sha256sums.copy():
+        if filename not in whl_html:
+            logging.warning(f'{filename} not found in wheels.html!')
+            saved_sha256sums.pop(filename)
+
+
 def main():
     pkgs = get_sha_pkgs()
     pbar = tqdm(pkgs)
     for pkg in pbar:
         sha_check(pkg[0], pkg[1], pbar)
+    remove_obsolete()
     save_sha256sums()
 
 

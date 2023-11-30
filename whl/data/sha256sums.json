@@ -1,1 +1,534 @@
-{"aiohttp-3.9.1-py3-none-any.whl": {"sha": "1a622d7ae22fdccd2eec5c461f7619ad3a27af5fbd07f792d16c826d02953f1c", "verify": true}, "apache_beam-2.48.0-py3-none-any.whl": {"sha": "0087be420593497a24aa4bc24bed870c26de7446323f145368a3ea6dd52bd1a1", "verify": true}, "apache_beam-2.52.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "0081fa9e85be66570bd4ed72434ce05d02c3574dc7d89c8209f1eb9e4be3e0e1", "verify": true}, "argon2_cffi_bindings-21.2.0-pp310-pypy310_pp73-linux_x86_64.whl": {"sha": "bfa08379a1746531ad89c4f20cc2fd37f394f2fca1f62ffba5b1199b66447576", "verify": true}, "argon2_cffi_bindings-21.2.0-pp39-pypy39_pp73-linux_x86_64.whl": {"sha": "44c22df1466f94c1b0221ed1a923c53d51d39026379aa0681b919780a45cf612", "verify": true}, "bcrypt-4.0.1-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "409864bf959b57e947692db03d8ab8f00ff9fbfdb2d016a0227961608d4f0515", "verify": true}, "blis-0.7.11-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "0155f9d1d59845cf0533102d56531a9f6ecc4c92e8487c902eff44dd4b49fb87", "verify": true}, "contourpy-1.2.0-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "8c764e54416f049ffbb1e55bd66ee91d092cded94971a67efd33ee1763252e42", "verify": true}, "cryptography-41.0.5-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "8000ae4ccf38547754aac59c39fe5c00c940a47ef53f75965837ab830b26b1db", "verify": true}, "cryptography-41.0.5-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "d0cad7b17fc5df39867ff583e1b367ca354d6ced8e13630b08464008667f3616", "verify": true}, "cryptography-41.0.5-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "e4ac9161aa0a06484496d7aec5be7fafd1650f8d5c0a8b340134de27da3ef5d9", "verify": true}, "dbt_extractor-0.4.1-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "166f34caf54e083ee43b0e806732faf0b7fc2e07d11771d9b36725b353a8ad7f", "verify": true}, "dbt_extractor-0.4.1-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "b753015d3b0ddbe14dd0a046040ebb9f2406c4bf7ff0f062e0d7315bee09f180", "verify": true}, "dbt_extractor-0.4.1-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "cc8ecc137b88c33e79a5daea6579a6e0373dff48f5a18608ebf30475fd42f87a", "verify": true}, "dbt_extractor-0.4.1-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "f11e35238e40ab958af77250c6f96b90577bd9e5f96640383cc83cf1ed1d7c1a", "verify": true}, "fastavro-1.9.0-py3-none-any.whl": {"sha": "43f7e71e00660e852c08d115bb1cb9ca05afd4ebda1c434e642441d46650e79c", "verify": true}, "greenlet-3.0.1-py3-none-any.whl": {"sha": "df5afe427f6735979a1411239d51d0f5b43a755b2744d31f782f0d5eee1f194f", "verify": true}, "grpcio-1.59.3-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "de72bccfda29f2ead6cc5527705ba270930db33eb1cf2d233e139af949460c47", "verify": true}, "grpcio-1.59.3-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "bbf981aa0dd1c6ebb9e69d2e8196fe32738c46388e7010be93196252fb8ccc16", "verify": true}, "grpcio_tools-1.53.0-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "6dfdfae68794d636ad718b310d2a79ef1e94a959f6216573ebbc7ef92c0d2abb", "verify": true}, "grpcio_tools-1.53.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "41e9d41c800f39fb15dafa22e0fa9acf9e41b4dd134517991bf018e2e437dfaf", "verify": true}, "grpcio_tools-1.59.3-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "0f8108c3b03134e3bfa605f66f6eae4540791883d9898842711f393f56b9c016", "verify": true}, "grpcio_tools-1.59.3-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "4c7c1523f2ec1fecc73b9a972ed0978e1eb35f37536eac7740607148b49a19bc", "verify": true}, "grpcio_tools-1.59.3-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "0224cac2b0071146f2aa55bd599e77b00e8c9f598cfe8fb93bdc7cc5ea16d75b", "verify": true}, "grpcio_tools-1.59.3-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "ceac61446353c9554e8fbf5ff57c7732bcbfa86aef963c7f947614f185bf1030", "verify": true}, "gsutil-5.27-py3-none-any.whl": {"sha": "8eefb7a30ab12b9e84d649291ae49db99ec0028bb87f857e1cbc1cc65b9f5de1", "verify": true}, "h5py-3.8.0-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "96daf89f2db1c0bf401efc03837718fd7f93a9726f9987948f6e7ebfb0a3f7c4", "verify": true}, "libcst-1.0.1-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "1a0b3f01031faada750f910d7c9386196b2cb7601006af68697d2b0e92a77314", "verify": true}, "libcst-1.1.0-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "fc12b75fec91f3c0c466385e8f33a3fee75e6db5e6f1a03b8eed96065d4ff098", "verify": true}, "libcst-1.1.0-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "3308e1768f44d4ef33b5ac3338f1048929e442f7ed799560cd7463e3a9ab6402", "verify": true}, "libcst-1.1.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "3592b6a105109c187fe8928c5aa45fcc8588599a811dfba57eacd851dc41d431", "verify": true}, "lightgbm-4.1.0-py3-none-manylinux_2_17_x86_64.whl": {"sha": "1c45271bc6d2aa429c3263a50ef88599c83ddcc2696973c20b94ffdadfab5883", "verify": true}, "llvmlite-0.41.1-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "46d79ed70aae9fac274d991d0c680d78f362b9afa7804dcc8b98144ec26fd310", "verify": true}, "llvmlite-0.41.1-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "d954c8e237d14c4c127b4ed1c8f73f60ba8f30626a557fdcbdc8eaecf22e929e", "verify": true}, "llvmlite-0.41.1-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "f3ea84ed1ce86dcd8d64e936bfecb5ec98afc098cf1054e26662879e796164cb", "verify": true}, "Logbook-1.5.3-pp310-pypy310_pp73-linux_x86_64.whl": {"sha": "4caf6d3b427cf95852daed262f0659195b39b52006b5bbc72209d8c8ec972a2d", "verify": true}, "Logbook-1.5.3-pp37-pypy37_pp73-linux_x86_64.whl": {"sha": "ee28c00ea2b3d88f961db93cb8fbb681101da6d979528ce70c8fdb084cfcb5e5", "verify": true}, "Logbook-1.5.3-pp38-pypy38_pp73-linux_x86_64.whl": {"sha": "9c5be50aba9a8aae4b14875a3f6fdcafb9c9269774e31bf0913039b05c95afb0", "verify": true}, "Logbook-1.5.3-pp39-pypy39_pp73-linux_x86_64.whl": {"sha": "fa70ca3363ffc713dff2d5ef4a197594de9dcab41e9824d63fc26925ca9573a7", "verify": true}, "matplotlib-3.8.2-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "7f0572c3d22c311068b74045553eea46a472816846fa958f2435d1d6d99d00de", "verify": true}, "numpy-1.21.6-pp310-pypy310_pp73-linux_x86_64.whl": {"sha": "1d1d8cb4c84519a18b1fa578d1fcbff639e9a24beebd680946c99cb7008e48cb", "verify": true}, "numpy-1.24.4-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "ec5f1805a765497361f25bb2dddd5048961abda138a037928f017f1c04d4173b", "verify": true}, "numpy-1.24.4-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "6251da6a47814f108b7a095a6a253e46c4547d79738cab87748a64e828902220", "verify": true}, "numpy-1.26.2-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "9626b18c826d143cf342f8e256faa87e5f2b8cb5e651a033b9c3eebd7e664de5", "verify": true}, "opencv_python-4.8.1.78-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "f154f4ea6247fa5c2aa049bfd6eb61a16025343b01fc10dc41e1b1ff96915a8f", "verify": true}, "opencv_python-4.8.1.78-pp37-pypy37_pp73-linux_x86_64.whl": {"sha": "2e1a2051a46aa622fa01065418f33632d3fa25b19fec261454f56b721fd37ce3", "verify": true}, "opencv_python-4.8.1.78-pp38-pypy38_pp73-linux_x86_64.whl": {"sha": "9d2693be17f0a7cb2ea3ddd9a0bae33eb2baae2120977a1343244613dcbc1d73", "verify": true}, "opencv_python-4.8.1.78-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "bc4e0b5a14a73b197f31aed48ec3ece62797c4707a3a08bb829008e3be804c1d", "verify": true}, "opencv_python_headless-4.8.1.78-pp37-pypy37_pp73-linux_x86_64.whl": {"sha": "d8c6cad9c7f6c537cda0c36d24c7a4fc4c98aff352340aa0d6e40a9e3702832f", "verify": true}, "opencv_python_headless-4.8.1.78-pp38-pypy38_pp73-linux_x86_64.whl": {"sha": "77ab2f51250ccd22aa2f47139f2814dbe577d49e43b744ff796008320d69cd4e", "verify": true}, "pandas-2.1.3-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "76e8d03342d264fd9d9b26f75454fff7311cef626046f573a06eeac19c279129", "verify": true}, "pandas-2.1.3-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "3dd642cfd095de28aed8ff8fb73c1de28320bc9f8301a2edcfdbb63a8db6d698", "verify": true}, "psycopg2-2.9.9-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "9627b35a76d042ccb77418ffc1d427e610116ed5ca79e1c8c6110b07c3167020", "verify": true}, "psycopg2-2.9.9-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "66111cbb39369268d4227f296173327c6f193ae82d45f370fa8b30f5b518c34e", "verify": true}, "psycopg2-2.9.9-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "23ee868ed8448f5f988280421930035247d2ee7738f57d46d775375305ee7431", "verify": true}, "psycopg2_binary-2.9.9-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "bc1c81b3172e7afe6bdb0b57da16791760d71f236bf19e670ddb7afa7f6815a8", "verify": true}, "psycopg2_binary-2.9.9-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "bd0ce616b62b061b941a9d98adb27e9dab7df5428a58efbda0b247f8c0869507", "verify": true}, "psycopg2_binary-2.9.9-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "40d0fbba5de749918d89b357dfe1912954f1e374820a9120368f259d854da125", "verify": true}, "pyarrow-14.0.1-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "3240cd24dcf46fa8ab8a95a0ec482dc27254709e41300ba558c65a20f4b288e6", "verify": true}, "pyarrow-14.0.1-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "4146506e51cc1b0dd7a540081d1355a3955f45a4bc50a919ad785b018025029e", "verify": true}, "pymongo-4.6.0-py3-none-any.whl": {"sha": "a085adc7aa0d68ea5f9c1885b0e5240a18432cbe4d375eddec3d19f14572d85f", "verify": true}, "pywavelets-1.5.0-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "aa4d885ba774fea7839692b1106afe86f6140d390d21bbab3e49f726236d9f32", "verify": true}, "pywavelets-1.5.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "44b857a89f0de5972546c95c20df7fa2ce18e627a5e62d22ebaaea365c028775", "verify": true}, "rapidfuzz-3.5.2-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "593369a53aeab27678c899dd8f7536450bdcf3168bf9f72fd25a338bf96e5aa4", "verify": true}, "ruamel.yaml.clib-0.2.8-pp310-pypy310_pp73-linux_x86_64.whl": {"sha": "e256c2168e16bf029d81e1aa3304739f15586e22288100b3d706a67dbaee5351", "verify": true}, "ruamel.yaml.clib-0.2.8-pp37-pypy37_pp73-linux_x86_64.whl": {"sha": "89f2ce2fc1ce2aeaac30d8a7db13b4a9e84119c49e5cb609549e783d6ae00602", "verify": true}, "ruamel.yaml.clib-0.2.8-pp38-pypy38_pp73-linux_x86_64.whl": {"sha": "806ba35833b4a25d1765de6ee916e49ce2f3d419c656b594b0b5bf1a2ef031c5", "verify": true}, "ruamel.yaml.clib-0.2.8-pp39-pypy39_pp73-linux_x86_64.whl": {"sha": "f53b8aa1235dd2bfb6daae36a4a0a962de9ec47866d88206dd9490f3e3b363f7", "verify": true}, "rustworkx-0.13.2-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "b524f1c529d51e55e0b1c48cfbf4cbc19c5dbe25447bae8d52c3db1924ee2fc6", "verify": true}, "rustworkx-0.13.2-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "ea7eafb5c8f54de0300059d6f536f274176fe4aeffd009b028481aa39c57c33e", "verify": true}, "rustworkx-0.13.2-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "78aafbd60aeb41b956e3fba425d203b003a0d102d1f11d4a44902e2d1b985236", "verify": true}, "rustworkx-0.13.2-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "1e0a631146fa89f6e571994e4a94736576a12f3d2b2d86ae2e0c6bddf1e2465a", "verify": true}, "sagemaker-2.197.0-py2.py3-none-any.whl": {"sha": "12710e939fb640a7a601610f16bff0e0e5815c1d33f1f05557f2a4ecb40f3b59", "verify": true}, "scipy-1.7.3-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "0014248d3d7ef194adcb3db0d3cbe046b93f2f65210a26930531e8ea28ab50ec", "verify": true}, "snowflake_connector_python-3.5.0-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "d213dead96fd063324cea1be1520405b2c8ab734d53b65df705850d7f835ebf9", "verify": true}, "snowflake_connector_python-3.5.0-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "aa013442a43f0a37f6c57adf9459a1e383f3dd6e04ce7eddae1f73d3d47e0b54", "verify": true}, "snowflake_connector_python-3.5.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "cab46d7288cceb220a02506a564f282196cf61237f2e14e84a2f1b4d6ead00c5", "verify": true}, "spacy-3.7.2-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "3819f649f1931c0c723f487561bcbd8d1c4f753c0fd6486a411e9be31d5d0401", "verify": true}, "SQLAlchemy-1.4.50-pp310-pypy310_pp73-linux_x86_64.whl": {"sha": "f581f0ec2a2e5e4c3bc0377d5ff59f02f068a6757c72d6a3e884a179d3197c2f", "verify": true}, "SQLAlchemy-1.4.50-pp37-pypy37_pp73-linux_x86_64.whl": {"sha": "768833a48e893c835db35010d0181f73be65ec344856442ce360388d7f5a0a31", "verify": true}, "SQLAlchemy-1.4.50-pp38-pypy38_pp73-linux_x86_64.whl": {"sha": "f84a842a0271df26269f6b6a9231eaa8b4a1f0fe278edbc90ad0ccbf393a6586", "verify": true}, "SQLAlchemy-1.4.50-pp39-pypy39_pp73-linux_x86_64.whl": {"sha": "397ad6a41cf9653b60d987e170fe723665fafcb1e50b92b34e897790308a6ff0", "verify": true}, "statsmodels-0.13.5-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "65bf71cfa5daeb39d9b0ae6f5707a868d66d05ccc9bc2f80d81564868bc4cd2b", "verify": true}, "thinc-8.2.1-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "7f328eaf7baaf31d4b53bddba02acc359842ea9f13193234ecc27e9e70280752", "verify": true}, "uamqp-1.6.6-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "440c80f8373351ce34b8c3ab31760d8ce03391b506ad33ad5328fc6e98e94dde", "verify": true}, "uvloop-0.19.0-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "93e2a99123f29d58001c51e49b1258afce1c27574ae8de3b3d4a6b44c733ce5b", "verify": true}, "uvloop-0.19.0-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "841b63bfae7d560b90fee6e068afbfa59c80d6e3893034d311287abc1b732095", "verify": true}, "uvloop-0.19.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "c22345b5206c6db4c7195743a59eaeb9650f20cc27e11a1afa5e101f3a1d6845", "verify": true}, "y_py-0.6.2-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "7a15da7188d18f9cd829ae4f3bf09346356ab8a7674d29b24f6db5e7b112276e", "verify": true}, "zstandard-0.22.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "20d375d407f1213f8274127ba4c8ab9f952490fc22885c5154853236e4d52c82", "verify": true}, "argon2_cffi_bindings-21.2.0-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "ccf1fbb61ef5ce019cf0b9a903dee0f2d7254baf6ab1537864aefd3a10546511", "verify": false}, "numpy-1.21.6-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "0f6e06c3a90c69c7538098824c1077620e98ec00aa375603e5c20e41cf634758", "verify": false}, "ruamel.yaml.clib-0.2.8-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "b09ef92267156b975502ac9bdb1001bc018e998608ccd9df074fdfffd3d2a657", "verify": false}, "opencv_python-4.8.1.78-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "04d6b20e8d2db0ecd2c759049342e3a6faa4a92d79f2fe5798ee224c002f9fd7", "verify": false}, "opencv_python_headless-4.8.1.78-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "b6c66302acee4386c0c55f38e9d013b7b44b17a11571451f6099d8d3e866814a", "verify": false}, "ruamel.yaml.clib-0.2.8-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "2664a02f426b59631cc8b7855d4e61bac293cc35b1a032dc6b1ec8c720e192c2", "verify": false}, "opencv_python-4.8.1.78-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "154ff2420dab6aa2fd9000b253608d4932844bc069e1832e4619e0ac3fa17bf4", "verify": false}, "opencv_python_headless-4.8.1.78-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "b6cb6855379160faa680c31a6a198007dc4d9e0fe65c547a997a6b2f95c5dfdb", "verify": false}, "ruamel.yaml.clib-0.2.8-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "18d58c4dd4d3b07f6f78638aa86c5046b6cf8ed3d223378d761cb345c0bbbcb7", "verify": false}, "argon2_cffi_bindings-21.2.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "4c8343c729ec9b7371a3ee5f9e9b5cb4ff7f6e693b956c04e958cdecbb7bff53", "verify": false}, "ruamel.yaml.clib-0.2.8-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {"sha": "ad0f478b21a1213c38551c527afa832a38d483131abf51183f26183fdfbbde13", "verify": false}, "bcrypt-4.1.1-pp310-pypy310_pp73-win_amd64.whl": {"sha": "0296edc0a2631f31272c300c456bcaa9c058dab5c13208c493d471c3e36b2d87", "verify": true}, "bcrypt-4.1.1-pp37-pypy37_pp73-win_amd64.whl": {"sha": "7158dbdcb4f8a5947a2147b1071410b1c2584ac06b7384d5e1022e83a72e2184", "verify": true}, "bcrypt-4.1.1-pp38-pypy38_pp73-win_amd64.whl": {"sha": "7b20b765cf267c5101033223398be82700c39b7c55b12e184449744a387bf2b9", "verify": true}, "bcrypt-4.1.1-pp39-pypy39_pp73-win_amd64.whl": {"sha": "3453f8af2b8dc7163e9eac6cb870c568bdeb1faa7240314aadaf808a37dc4fa5", "verify": true}, "contourpy-1.2.0-pp310-pypy310_pp73-win_amd64.whl": {"sha": "79954f715a3a6ebbfbfe8ac3fb39e64679049223c628f2d99510d919c0796ce0", "verify": true}, "grpcio_tools-1.59.3-pp310-pypy310_pp73-win_amd64.whl": {"sha": "dd82842cd37b58e111918d1c1c0a42bfadf9e9ee466f0f74518f7775ffbe9478", "verify": true}, "grpcio_tools-1.59.3-pp37-pypy37_pp73-win_amd64.whl": {"sha": "570b030448757366e6b27bdb60295400d18870f52374a6eb3884a14e6aec7d4f", "verify": true}, "grpcio_tools-1.59.3-pp38-pypy38_pp73-win_amd64.whl": {"sha": "ad6995d65f90a168a3e4c887f097b48f4e9cb3bb05dcdb1079ceb9bed9d2d8cd", "verify": true}, "grpcio_tools-1.59.3-pp39-pypy39_pp73-win_amd64.whl": {"sha": "52098544f8d18fcd725c04410cbe98d30e8525010f21801759773e2de7e02437", "verify": true}, "httptools-0.6.1-pp310-pypy310_pp73-win_amd64.whl": {"sha": "2ca2a6bca058640fe4f9573e97e8c501ccdedd8f7fb1600d09a73c0e40774c64", "verify": true}, "httptools-0.6.1-pp39-pypy39_pp73-win_amd64.whl": {"sha": "d19b03c9666afc42e3b92633d336d2e0cc981787616ffd4bba03c2978bb7c887", "verify": true}, "matplotlib-3.8.2-pp310-pypy310_pp73-win_amd64.whl": {"sha": "c0558d9026b494e5e51c050b15cb59520c09b4af97bd863b9b2b0299c432f898", "verify": true}, "numpy-1.21.6-pp310-pypy310_pp73-win_amd64.whl": {"sha": "c72d87b6262acce68d7a158f7ac651771878ad8b10d6a2ce7de4c41ad2b8c123", "verify": true}, "numpy-1.21.6-pp37-pypy37_pp73-win_amd64.whl": {"sha": "d88d08d3c147792a7daa0728a0d7cd26cdaacaa7276c925dbb2467d53925b580", "verify": true}, "numpy-1.26.2-pp310-pypy310_pp73-win_amd64.whl": {"sha": "c505860de512295a80986abf415ca1efe1435c7501713ea47e1788e7641829ce", "verify": true}, "pandas-2.1.3-pp310-pypy310_pp73-win_amd64.whl": {"sha": "fe8601fa93df54b162edbfb0da5451d0f13e9f24f3f42426d80c45d917e9a8c3", "verify": true}, "pandas-2.1.3-pp39-pypy39_pp73-win_amd64.whl": {"sha": "665153cfb8611692e07a259b5adbff6af98cc8b063c5366caec39dfb40761203", "verify": true}, "pydantic_core-2.14.5-pp37-pypy37_pp73-win_amd64.whl": {"sha": "f23996861798ba729509a906a6aea39129d2e2d539dbfb95cd6bf05a1e0b49d1", "verify": true}, "pywavelets-1.5.0-pp310-pypy310_pp73-win_amd64.whl": {"sha": "00bcb0b2b9dacb478314a7666e06dc38f7a9a16311b7d4be05edb7bc5c6e8523", "verify": true}, "pywavelets-1.5.0-pp39-pypy39_pp73-win_amd64.whl": {"sha": "c93800b28a8c65d1be9b321e6fbaeb260b6e1e1f12bb866348c64e3c67698a8a", "verify": true}, "rpds_py-0.13.1-pp310-pypy310_pp73-win_amd64.whl": {"sha": "07dd30c1091048fe868d00e8b8946066feb9f2ccf4f27ca1830f32a5b8688a0b", "verify": true}, "rpds_py-0.13.1-pp38-pypy38_pp73-win_amd64.whl": {"sha": "beb9f19855bf4157d3b71f9566d3d9d15cff6eb67622cdbc54c6238579062f94", "verify": true}, "rpds_py-0.13.1-pp39-pypy39_pp73-win_amd64.whl": {"sha": "61267d3fd71bcb45bbcfe5d01004e00c36334cc22e0780d3c75aac4fd041430d", "verify": true}, "rustworkx-0.13.2-pp310-pypy310_pp73-win_amd64.whl": {"sha": "457468230b5b194d7c9ecc8ceaac520866b718422839c533d6347561349bd69b", "verify": true}, "safetensors-0.4.1-pp310-pypy310_pp73-win_amd64.whl": {"sha": "c21e09d68f8c9e0e0065bc59d2d1b496f6cd0a94e89938f653faeebc9a3b83f5", "verify": true}, "safetensors-0.4.1-pp37-pypy37_pp73-win_amd64.whl": {"sha": "3f564ee2ac703fd8e1d77e777de61fd35fdd336dc2b5caf686114b12a165365d", "verify": true}, "safetensors-0.4.1-pp38-pypy38_pp73-win_amd64.whl": {"sha": "abca7aad64bf81ebd671e6f8d23dcaa7eda6de9fe64f2d4dbae6ac93243ff097", "verify": true}, "safetensors-0.4.1-pp39-pypy39_pp73-win_amd64.whl": {"sha": "a5c8754ff1095c4bd797fcbd096f8828f36a732d1e53090728f8c6488e475be8", "verify": true}, "sagemaker-2.198.0-py2.py3-none-any.whl": {"sha": "75a0d2884f0bdcb8cb40cde46049dd15d85d67cecafea22b3eaa8a5814df6457", "verify": true}, "sentencepiece-0.1.99-pp310-pypy310_pp73-win_amd64.whl": {"sha": "b87f8441aecc3ab4c65b1039fd093beabe9c563613f0749f215cbe5fb4931118", "verify": true}, "sentencepiece-0.1.99-pp37-pypy37_pp73-win_amd64.whl": {"sha": "aa73879bfd0ab35dd0efe1c6bb874eaa0c8dfaa86da380b702a133caf39fd333", "verify": true}, "sentencepiece-0.1.99-pp38-pypy38_pp73-win_amd64.whl": {"sha": "f394b69155c102ab9994885524a9f91e20e72b60331c3b9be2b1ace3d18f20bb", "verify": true}, "sentencepiece-0.1.99-pp39-pypy39_pp73-win_amd64.whl": {"sha": "f9bf1c4843b34885a5b5a69144506ba6c1457a22d809876801b04d342df8596a", "verify": true}, "snowflake_connector_python-3.5.0-pp310-pypy310_pp73-win_amd64.whl": {"sha": "7fb6031fdc42bb090def826bf1cdfcea5c23b7179a0def2272d58c242c97e95d", "verify": true}, "snowflake_connector_python-3.5.0-pp38-pypy38_pp73-win_amd64.whl": {"sha": "e98ba78222547a96ec10a5978c80ece0633fde3a3042a6341d1aa49212c862c5", "verify": true}, "snowflake_connector_python-3.5.0-pp39-pypy39_pp73-win_amd64.whl": {"sha": "e6f57f4afd1f2a1572768293da8ba882ce2bbe54a5682f9d91a05dbdc84807f9", "verify": true}, "SQLAlchemy-1.4.50-pp310-pypy310_pp73-win_amd64.whl": {"sha": "70e555d76d5accffe941d4d6f91b9f630c9e26f7296bd056671d31a48af50183", "verify": true}, "SQLAlchemy-1.4.50-pp38-pypy38_pp73-win_amd64.whl": {"sha": "f1444358c5982de2dd7909084f91d075b825d5d4789372df8e5a3e2549f5c86e", "verify": true}, "SQLAlchemy-1.4.50-pp39-pypy39_pp73-win_amd64.whl": {"sha": "ffdfa0783efe78ab4a2ad7391ce1ae0e5d3f7171748578889a1c16995da130e0", "verify": true}, "tokenizers-0.15.0-pp310-pypy310_pp73-win_amd64.whl": {"sha": "3a59756a6b1f50d09ac32adf84ce849d1e65817bfd0fdfba40ed9500de1bbe00", "verify": true}, "tokenizers-0.15.0-pp37-pypy37_pp73-win_amd64.whl": {"sha": "551cd9fba535a7b71266c1d220765282391081f18af629bcf7da1387ee973d35", "verify": true}, "tokenizers-0.15.0-pp38-pypy38_pp73-win_amd64.whl": {"sha": "0614f78fbb8a1859441128027a01ac110e3206bbdea61c8440888baf832bd321", "verify": true}, "tokenizers-0.15.0-pp39-pypy39_pp73-win_amd64.whl": {"sha": "800a645ea29efa63db2d76d1ccf7dad280cf1537887ed52bb1fc33751d5fa24a", "verify": true}}
+{
+  "aiohttp-3.9.1-py3-none-any.whl": {
+    "sha": "1a622d7ae22fdccd2eec5c461f7619ad3a27af5fbd07f792d16c826d02953f1c",
+    "verify": true
+  },
+  "apache_beam-2.48.0-py3-none-any.whl": {
+    "sha": "0087be420593497a24aa4bc24bed870c26de7446323f145368a3ea6dd52bd1a1",
+    "verify": true
+  },
+  "apache_beam-2.52.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "0081fa9e85be66570bd4ed72434ce05d02c3574dc7d89c8209f1eb9e4be3e0e1",
+    "verify": true
+  },
+  "argon2_cffi_bindings-21.2.0-pp310-pypy310_pp73-linux_x86_64.whl": {
+    "sha": "bfa08379a1746531ad89c4f20cc2fd37f394f2fca1f62ffba5b1199b66447576",
+    "verify": true
+  },
+  "argon2_cffi_bindings-21.2.0-pp39-pypy39_pp73-linux_x86_64.whl": {
+    "sha": "44c22df1466f94c1b0221ed1a923c53d51d39026379aa0681b919780a45cf612",
+    "verify": true
+  },
+  "bcrypt-4.0.1-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "409864bf959b57e947692db03d8ab8f00ff9fbfdb2d016a0227961608d4f0515",
+    "verify": true
+  },
+  "blis-0.7.11-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "0155f9d1d59845cf0533102d56531a9f6ecc4c92e8487c902eff44dd4b49fb87",
+    "verify": true
+  },
+  "contourpy-1.2.0-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "8c764e54416f049ffbb1e55bd66ee91d092cded94971a67efd33ee1763252e42",
+    "verify": true
+  },
+  "cryptography-41.0.5-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "8000ae4ccf38547754aac59c39fe5c00c940a47ef53f75965837ab830b26b1db",
+    "verify": true
+  },
+  "cryptography-41.0.5-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "d0cad7b17fc5df39867ff583e1b367ca354d6ced8e13630b08464008667f3616",
+    "verify": true
+  },
+  "cryptography-41.0.5-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "e4ac9161aa0a06484496d7aec5be7fafd1650f8d5c0a8b340134de27da3ef5d9",
+    "verify": true
+  },
+  "dbt_extractor-0.4.1-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "166f34caf54e083ee43b0e806732faf0b7fc2e07d11771d9b36725b353a8ad7f",
+    "verify": true
+  },
+  "dbt_extractor-0.4.1-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "b753015d3b0ddbe14dd0a046040ebb9f2406c4bf7ff0f062e0d7315bee09f180",
+    "verify": true
+  },
+  "dbt_extractor-0.4.1-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "cc8ecc137b88c33e79a5daea6579a6e0373dff48f5a18608ebf30475fd42f87a",
+    "verify": true
+  },
+  "dbt_extractor-0.4.1-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "f11e35238e40ab958af77250c6f96b90577bd9e5f96640383cc83cf1ed1d7c1a",
+    "verify": true
+  },
+  "fastavro-1.9.0-py3-none-any.whl": {
+    "sha": "43f7e71e00660e852c08d115bb1cb9ca05afd4ebda1c434e642441d46650e79c",
+    "verify": true
+  },
+  "greenlet-3.0.1-py3-none-any.whl": {
+    "sha": "df5afe427f6735979a1411239d51d0f5b43a755b2744d31f782f0d5eee1f194f",
+    "verify": true
+  },
+  "grpcio-1.59.3-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "de72bccfda29f2ead6cc5527705ba270930db33eb1cf2d233e139af949460c47",
+    "verify": true
+  },
+  "grpcio-1.59.3-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "bbf981aa0dd1c6ebb9e69d2e8196fe32738c46388e7010be93196252fb8ccc16",
+    "verify": true
+  },
+  "grpcio_tools-1.53.0-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "6dfdfae68794d636ad718b310d2a79ef1e94a959f6216573ebbc7ef92c0d2abb",
+    "verify": true
+  },
+  "grpcio_tools-1.53.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "41e9d41c800f39fb15dafa22e0fa9acf9e41b4dd134517991bf018e2e437dfaf",
+    "verify": true
+  },
+  "grpcio_tools-1.59.3-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "0f8108c3b03134e3bfa605f66f6eae4540791883d9898842711f393f56b9c016",
+    "verify": true
+  },
+  "grpcio_tools-1.59.3-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "4c7c1523f2ec1fecc73b9a972ed0978e1eb35f37536eac7740607148b49a19bc",
+    "verify": true
+  },
+  "grpcio_tools-1.59.3-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "0224cac2b0071146f2aa55bd599e77b00e8c9f598cfe8fb93bdc7cc5ea16d75b",
+    "verify": true
+  },
+  "grpcio_tools-1.59.3-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "ceac61446353c9554e8fbf5ff57c7732bcbfa86aef963c7f947614f185bf1030",
+    "verify": true
+  },
+  "gsutil-5.27-py3-none-any.whl": {
+    "sha": "8eefb7a30ab12b9e84d649291ae49db99ec0028bb87f857e1cbc1cc65b9f5de1",
+    "verify": true
+  },
+  "h5py-3.8.0-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "96daf89f2db1c0bf401efc03837718fd7f93a9726f9987948f6e7ebfb0a3f7c4",
+    "verify": true
+  },
+  "libcst-1.0.1-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "1a0b3f01031faada750f910d7c9386196b2cb7601006af68697d2b0e92a77314",
+    "verify": true
+  },
+  "libcst-1.1.0-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "fc12b75fec91f3c0c466385e8f33a3fee75e6db5e6f1a03b8eed96065d4ff098",
+    "verify": true
+  },
+  "libcst-1.1.0-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "3308e1768f44d4ef33b5ac3338f1048929e442f7ed799560cd7463e3a9ab6402",
+    "verify": true
+  },
+  "libcst-1.1.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "3592b6a105109c187fe8928c5aa45fcc8588599a811dfba57eacd851dc41d431",
+    "verify": true
+  },
+  "lightgbm-4.1.0-py3-none-manylinux_2_17_x86_64.whl": {
+    "sha": "1c45271bc6d2aa429c3263a50ef88599c83ddcc2696973c20b94ffdadfab5883",
+    "verify": true
+  },
+  "llvmlite-0.41.1-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "46d79ed70aae9fac274d991d0c680d78f362b9afa7804dcc8b98144ec26fd310",
+    "verify": true
+  },
+  "llvmlite-0.41.1-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "d954c8e237d14c4c127b4ed1c8f73f60ba8f30626a557fdcbdc8eaecf22e929e",
+    "verify": true
+  },
+  "llvmlite-0.41.1-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "f3ea84ed1ce86dcd8d64e936bfecb5ec98afc098cf1054e26662879e796164cb",
+    "verify": true
+  },
+  "Logbook-1.5.3-pp310-pypy310_pp73-linux_x86_64.whl": {
+    "sha": "4caf6d3b427cf95852daed262f0659195b39b52006b5bbc72209d8c8ec972a2d",
+    "verify": true
+  },
+  "Logbook-1.5.3-pp37-pypy37_pp73-linux_x86_64.whl": {
+    "sha": "ee28c00ea2b3d88f961db93cb8fbb681101da6d979528ce70c8fdb084cfcb5e5",
+    "verify": true
+  },
+  "Logbook-1.5.3-pp38-pypy38_pp73-linux_x86_64.whl": {
+    "sha": "9c5be50aba9a8aae4b14875a3f6fdcafb9c9269774e31bf0913039b05c95afb0",
+    "verify": true
+  },
+  "Logbook-1.5.3-pp39-pypy39_pp73-linux_x86_64.whl": {
+    "sha": "fa70ca3363ffc713dff2d5ef4a197594de9dcab41e9824d63fc26925ca9573a7",
+    "verify": true
+  },
+  "matplotlib-3.8.2-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "7f0572c3d22c311068b74045553eea46a472816846fa958f2435d1d6d99d00de",
+    "verify": true
+  },
+  "numpy-1.21.6-pp310-pypy310_pp73-linux_x86_64.whl": {
+    "sha": "1d1d8cb4c84519a18b1fa578d1fcbff639e9a24beebd680946c99cb7008e48cb",
+    "verify": true
+  },
+  "numpy-1.24.4-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "ec5f1805a765497361f25bb2dddd5048961abda138a037928f017f1c04d4173b",
+    "verify": true
+  },
+  "numpy-1.24.4-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "6251da6a47814f108b7a095a6a253e46c4547d79738cab87748a64e828902220",
+    "verify": true
+  },
+  "numpy-1.26.2-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "9626b18c826d143cf342f8e256faa87e5f2b8cb5e651a033b9c3eebd7e664de5",
+    "verify": true
+  },
+  "opencv_python-4.8.1.78-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "f154f4ea6247fa5c2aa049bfd6eb61a16025343b01fc10dc41e1b1ff96915a8f",
+    "verify": true
+  },
+  "opencv_python-4.8.1.78-pp37-pypy37_pp73-linux_x86_64.whl": {
+    "sha": "2e1a2051a46aa622fa01065418f33632d3fa25b19fec261454f56b721fd37ce3",
+    "verify": true
+  },
+  "opencv_python-4.8.1.78-pp38-pypy38_pp73-linux_x86_64.whl": {
+    "sha": "9d2693be17f0a7cb2ea3ddd9a0bae33eb2baae2120977a1343244613dcbc1d73",
+    "verify": true
+  },
+  "opencv_python-4.8.1.78-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "bc4e0b5a14a73b197f31aed48ec3ece62797c4707a3a08bb829008e3be804c1d",
+    "verify": true
+  },
+  "opencv_python_headless-4.8.1.78-pp37-pypy37_pp73-linux_x86_64.whl": {
+    "sha": "d8c6cad9c7f6c537cda0c36d24c7a4fc4c98aff352340aa0d6e40a9e3702832f",
+    "verify": true
+  },
+  "opencv_python_headless-4.8.1.78-pp38-pypy38_pp73-linux_x86_64.whl": {
+    "sha": "77ab2f51250ccd22aa2f47139f2814dbe577d49e43b744ff796008320d69cd4e",
+    "verify": true
+  },
+  "pandas-2.1.3-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "76e8d03342d264fd9d9b26f75454fff7311cef626046f573a06eeac19c279129",
+    "verify": true
+  },
+  "pandas-2.1.3-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "3dd642cfd095de28aed8ff8fb73c1de28320bc9f8301a2edcfdbb63a8db6d698",
+    "verify": true
+  },
+  "psycopg2-2.9.9-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "9627b35a76d042ccb77418ffc1d427e610116ed5ca79e1c8c6110b07c3167020",
+    "verify": true
+  },
+  "psycopg2-2.9.9-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "66111cbb39369268d4227f296173327c6f193ae82d45f370fa8b30f5b518c34e",
+    "verify": true
+  },
+  "psycopg2-2.9.9-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "23ee868ed8448f5f988280421930035247d2ee7738f57d46d775375305ee7431",
+    "verify": true
+  },
+  "psycopg2_binary-2.9.9-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "bc1c81b3172e7afe6bdb0b57da16791760d71f236bf19e670ddb7afa7f6815a8",
+    "verify": true
+  },
+  "psycopg2_binary-2.9.9-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "bd0ce616b62b061b941a9d98adb27e9dab7df5428a58efbda0b247f8c0869507",
+    "verify": true
+  },
+  "psycopg2_binary-2.9.9-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "40d0fbba5de749918d89b357dfe1912954f1e374820a9120368f259d854da125",
+    "verify": true
+  },
+  "pyarrow-14.0.1-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "3240cd24dcf46fa8ab8a95a0ec482dc27254709e41300ba558c65a20f4b288e6",
+    "verify": true
+  },
+  "pyarrow-14.0.1-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "4146506e51cc1b0dd7a540081d1355a3955f45a4bc50a919ad785b018025029e",
+    "verify": true
+  },
+  "pymongo-4.6.0-py3-none-any.whl": {
+    "sha": "a085adc7aa0d68ea5f9c1885b0e5240a18432cbe4d375eddec3d19f14572d85f",
+    "verify": true
+  },
+  "pywavelets-1.5.0-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "aa4d885ba774fea7839692b1106afe86f6140d390d21bbab3e49f726236d9f32",
+    "verify": true
+  },
+  "pywavelets-1.5.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "44b857a89f0de5972546c95c20df7fa2ce18e627a5e62d22ebaaea365c028775",
+    "verify": true
+  },
+  "rapidfuzz-3.5.2-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "593369a53aeab27678c899dd8f7536450bdcf3168bf9f72fd25a338bf96e5aa4",
+    "verify": true
+  },
+  "ruamel.yaml.clib-0.2.8-pp310-pypy310_pp73-linux_x86_64.whl": {
+    "sha": "e256c2168e16bf029d81e1aa3304739f15586e22288100b3d706a67dbaee5351",
+    "verify": true
+  },
+  "ruamel.yaml.clib-0.2.8-pp37-pypy37_pp73-linux_x86_64.whl": {
+    "sha": "89f2ce2fc1ce2aeaac30d8a7db13b4a9e84119c49e5cb609549e783d6ae00602",
+    "verify": true
+  },
+  "ruamel.yaml.clib-0.2.8-pp38-pypy38_pp73-linux_x86_64.whl": {
+    "sha": "806ba35833b4a25d1765de6ee916e49ce2f3d419c656b594b0b5bf1a2ef031c5",
+    "verify": true
+  },
+  "ruamel.yaml.clib-0.2.8-pp39-pypy39_pp73-linux_x86_64.whl": {
+    "sha": "f53b8aa1235dd2bfb6daae36a4a0a962de9ec47866d88206dd9490f3e3b363f7",
+    "verify": true
+  },
+  "rustworkx-0.13.2-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "b524f1c529d51e55e0b1c48cfbf4cbc19c5dbe25447bae8d52c3db1924ee2fc6",
+    "verify": true
+  },
+  "rustworkx-0.13.2-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "ea7eafb5c8f54de0300059d6f536f274176fe4aeffd009b028481aa39c57c33e",
+    "verify": true
+  },
+  "rustworkx-0.13.2-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "78aafbd60aeb41b956e3fba425d203b003a0d102d1f11d4a44902e2d1b985236",
+    "verify": true
+  },
+  "rustworkx-0.13.2-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "1e0a631146fa89f6e571994e4a94736576a12f3d2b2d86ae2e0c6bddf1e2465a",
+    "verify": true
+  },
+  "sagemaker-2.197.0-py2.py3-none-any.whl": {
+    "sha": "12710e939fb640a7a601610f16bff0e0e5815c1d33f1f05557f2a4ecb40f3b59",
+    "verify": true
+  },
+  "scipy-1.7.3-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "0014248d3d7ef194adcb3db0d3cbe046b93f2f65210a26930531e8ea28ab50ec",
+    "verify": true
+  },
+  "snowflake_connector_python-3.5.0-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "d213dead96fd063324cea1be1520405b2c8ab734d53b65df705850d7f835ebf9",
+    "verify": true
+  },
+  "snowflake_connector_python-3.5.0-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "aa013442a43f0a37f6c57adf9459a1e383f3dd6e04ce7eddae1f73d3d47e0b54",
+    "verify": true
+  },
+  "snowflake_connector_python-3.5.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "cab46d7288cceb220a02506a564f282196cf61237f2e14e84a2f1b4d6ead00c5",
+    "verify": true
+  },
+  "spacy-3.7.2-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "3819f649f1931c0c723f487561bcbd8d1c4f753c0fd6486a411e9be31d5d0401",
+    "verify": true
+  },
+  "SQLAlchemy-1.4.50-pp310-pypy310_pp73-linux_x86_64.whl": {
+    "sha": "f581f0ec2a2e5e4c3bc0377d5ff59f02f068a6757c72d6a3e884a179d3197c2f",
+    "verify": true
+  },
+  "SQLAlchemy-1.4.50-pp37-pypy37_pp73-linux_x86_64.whl": {
+    "sha": "768833a48e893c835db35010d0181f73be65ec344856442ce360388d7f5a0a31",
+    "verify": true
+  },
+  "SQLAlchemy-1.4.50-pp38-pypy38_pp73-linux_x86_64.whl": {
+    "sha": "f84a842a0271df26269f6b6a9231eaa8b4a1f0fe278edbc90ad0ccbf393a6586",
+    "verify": true
+  },
+  "SQLAlchemy-1.4.50-pp39-pypy39_pp73-linux_x86_64.whl": {
+    "sha": "397ad6a41cf9653b60d987e170fe723665fafcb1e50b92b34e897790308a6ff0",
+    "verify": true
+  },
+  "statsmodels-0.13.5-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "65bf71cfa5daeb39d9b0ae6f5707a868d66d05ccc9bc2f80d81564868bc4cd2b",
+    "verify": true
+  },
+  "thinc-8.2.1-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "7f328eaf7baaf31d4b53bddba02acc359842ea9f13193234ecc27e9e70280752",
+    "verify": true
+  },
+  "uamqp-1.6.6-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "440c80f8373351ce34b8c3ab31760d8ce03391b506ad33ad5328fc6e98e94dde",
+    "verify": true
+  },
+  "uvloop-0.19.0-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "93e2a99123f29d58001c51e49b1258afce1c27574ae8de3b3d4a6b44c733ce5b",
+    "verify": true
+  },
+  "uvloop-0.19.0-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "841b63bfae7d560b90fee6e068afbfa59c80d6e3893034d311287abc1b732095",
+    "verify": true
+  },
+  "uvloop-0.19.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "c22345b5206c6db4c7195743a59eaeb9650f20cc27e11a1afa5e101f3a1d6845",
+    "verify": true
+  },
+  "y_py-0.6.2-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "7a15da7188d18f9cd829ae4f3bf09346356ab8a7674d29b24f6db5e7b112276e",
+    "verify": true
+  },
+  "zstandard-0.22.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+    "sha": "20d375d407f1213f8274127ba4c8ab9f952490fc22885c5154853236e4d52c82",
+    "verify": true
+  },
+  "bcrypt-4.1.1-pp310-pypy310_pp73-win_amd64.whl": {
+    "sha": "0296edc0a2631f31272c300c456bcaa9c058dab5c13208c493d471c3e36b2d87",
+    "verify": true
+  },
+  "bcrypt-4.1.1-pp37-pypy37_pp73-win_amd64.whl": {
+    "sha": "7158dbdcb4f8a5947a2147b1071410b1c2584ac06b7384d5e1022e83a72e2184",
+    "verify": true
+  },
+  "bcrypt-4.1.1-pp38-pypy38_pp73-win_amd64.whl": {
+    "sha": "7b20b765cf267c5101033223398be82700c39b7c55b12e184449744a387bf2b9",
+    "verify": true
+  },
+  "bcrypt-4.1.1-pp39-pypy39_pp73-win_amd64.whl": {
+    "sha": "3453f8af2b8dc7163e9eac6cb870c568bdeb1faa7240314aadaf808a37dc4fa5",
+    "verify": true
+  },
+  "contourpy-1.2.0-pp310-pypy310_pp73-win_amd64.whl": {
+    "sha": "79954f715a3a6ebbfbfe8ac3fb39e64679049223c628f2d99510d919c0796ce0",
+    "verify": true
+  },
+  "grpcio_tools-1.59.3-pp310-pypy310_pp73-win_amd64.whl": {
+    "sha": "dd82842cd37b58e111918d1c1c0a42bfadf9e9ee466f0f74518f7775ffbe9478",
+    "verify": true
+  },
+  "grpcio_tools-1.59.3-pp37-pypy37_pp73-win_amd64.whl": {
+    "sha": "570b030448757366e6b27bdb60295400d18870f52374a6eb3884a14e6aec7d4f",
+    "verify": true
+  },
+  "grpcio_tools-1.59.3-pp38-pypy38_pp73-win_amd64.whl": {
+    "sha": "ad6995d65f90a168a3e4c887f097b48f4e9cb3bb05dcdb1079ceb9bed9d2d8cd",
+    "verify": true
+  },
+  "grpcio_tools-1.59.3-pp39-pypy39_pp73-win_amd64.whl": {
+    "sha": "52098544f8d18fcd725c04410cbe98d30e8525010f21801759773e2de7e02437",
+    "verify": true
+  },
+  "httptools-0.6.1-pp310-pypy310_pp73-win_amd64.whl": {
+    "sha": "2ca2a6bca058640fe4f9573e97e8c501ccdedd8f7fb1600d09a73c0e40774c64",
+    "verify": true
+  },
+  "httptools-0.6.1-pp39-pypy39_pp73-win_amd64.whl": {
+    "sha": "d19b03c9666afc42e3b92633d336d2e0cc981787616ffd4bba03c2978bb7c887",
+    "verify": true
+  },
+  "matplotlib-3.8.2-pp310-pypy310_pp73-win_amd64.whl": {
+    "sha": "c0558d9026b494e5e51c050b15cb59520c09b4af97bd863b9b2b0299c432f898",
+    "verify": true
+  },
+  "numpy-1.21.6-pp310-pypy310_pp73-win_amd64.whl": {
+    "sha": "c72d87b6262acce68d7a158f7ac651771878ad8b10d6a2ce7de4c41ad2b8c123",
+    "verify": true
+  },
+  "numpy-1.21.6-pp37-pypy37_pp73-win_amd64.whl": {
+    "sha": "d88d08d3c147792a7daa0728a0d7cd26cdaacaa7276c925dbb2467d53925b580",
+    "verify": true
+  },
+  "numpy-1.26.2-pp310-pypy310_pp73-win_amd64.whl": {
+    "sha": "c505860de512295a80986abf415ca1efe1435c7501713ea47e1788e7641829ce",
+    "verify": true
+  },
+  "pandas-2.1.3-pp310-pypy310_pp73-win_amd64.whl": {
+    "sha": "fe8601fa93df54b162edbfb0da5451d0f13e9f24f3f42426d80c45d917e9a8c3",
+    "verify": true
+  },
+  "pandas-2.1.3-pp39-pypy39_pp73-win_amd64.whl": {
+    "sha": "665153cfb8611692e07a259b5adbff6af98cc8b063c5366caec39dfb40761203",
+    "verify": true
+  },
+  "pydantic_core-2.14.5-pp37-pypy37_pp73-win_amd64.whl": {
+    "sha": "f23996861798ba729509a906a6aea39129d2e2d539dbfb95cd6bf05a1e0b49d1",
+    "verify": true
+  },
+  "pywavelets-1.5.0-pp310-pypy310_pp73-win_amd64.whl": {
+    "sha": "00bcb0b2b9dacb478314a7666e06dc38f7a9a16311b7d4be05edb7bc5c6e8523",
+    "verify": true
+  },
+  "pywavelets-1.5.0-pp39-pypy39_pp73-win_amd64.whl": {
+    "sha": "c93800b28a8c65d1be9b321e6fbaeb260b6e1e1f12bb866348c64e3c67698a8a",
+    "verify": true
+  },
+  "rpds_py-0.13.1-pp310-pypy310_pp73-win_amd64.whl": {
+    "sha": "07dd30c1091048fe868d00e8b8946066feb9f2ccf4f27ca1830f32a5b8688a0b",
+    "verify": true
+  },
+  "rpds_py-0.13.1-pp38-pypy38_pp73-win_amd64.whl": {
+    "sha": "beb9f19855bf4157d3b71f9566d3d9d15cff6eb67622cdbc54c6238579062f94",
+    "verify": true
+  },
+  "rpds_py-0.13.1-pp39-pypy39_pp73-win_amd64.whl": {
+    "sha": "61267d3fd71bcb45bbcfe5d01004e00c36334cc22e0780d3c75aac4fd041430d",
+    "verify": true
+  },
+  "rustworkx-0.13.2-pp310-pypy310_pp73-win_amd64.whl": {
+    "sha": "457468230b5b194d7c9ecc8ceaac520866b718422839c533d6347561349bd69b",
+    "verify": true
+  },
+  "safetensors-0.4.1-pp310-pypy310_pp73-win_amd64.whl": {
+    "sha": "c21e09d68f8c9e0e0065bc59d2d1b496f6cd0a94e89938f653faeebc9a3b83f5",
+    "verify": true
+  },
+  "safetensors-0.4.1-pp37-pypy37_pp73-win_amd64.whl": {
+    "sha": "3f564ee2ac703fd8e1d77e777de61fd35fdd336dc2b5caf686114b12a165365d",
+    "verify": true
+  },
+  "safetensors-0.4.1-pp38-pypy38_pp73-win_amd64.whl": {
+    "sha": "abca7aad64bf81ebd671e6f8d23dcaa7eda6de9fe64f2d4dbae6ac93243ff097",
+    "verify": true
+  },
+  "safetensors-0.4.1-pp39-pypy39_pp73-win_amd64.whl": {
+    "sha": "a5c8754ff1095c4bd797fcbd096f8828f36a732d1e53090728f8c6488e475be8",
+    "verify": true
+  },
+  "sagemaker-2.198.0-py2.py3-none-any.whl": {
+    "sha": "75a0d2884f0bdcb8cb40cde46049dd15d85d67cecafea22b3eaa8a5814df6457",
+    "verify": true
+  },
+  "sentencepiece-0.1.99-pp310-pypy310_pp73-win_amd64.whl": {
+    "sha": "b87f8441aecc3ab4c65b1039fd093beabe9c563613f0749f215cbe5fb4931118",
+    "verify": true
+  },
+  "sentencepiece-0.1.99-pp37-pypy37_pp73-win_amd64.whl": {
+    "sha": "aa73879bfd0ab35dd0efe1c6bb874eaa0c8dfaa86da380b702a133caf39fd333",
+    "verify": true
+  },
+  "sentencepiece-0.1.99-pp38-pypy38_pp73-win_amd64.whl": {
+    "sha": "f394b69155c102ab9994885524a9f91e20e72b60331c3b9be2b1ace3d18f20bb",
+    "verify": true
+  },
+  "sentencepiece-0.1.99-pp39-pypy39_pp73-win_amd64.whl": {
+    "sha": "f9bf1c4843b34885a5b5a69144506ba6c1457a22d809876801b04d342df8596a",
+    "verify": true
+  },
+  "snowflake_connector_python-3.5.0-pp310-pypy310_pp73-win_amd64.whl": {
+    "sha": "7fb6031fdc42bb090def826bf1cdfcea5c23b7179a0def2272d58c242c97e95d",
+    "verify": true
+  },
+  "snowflake_connector_python-3.5.0-pp38-pypy38_pp73-win_amd64.whl": {
+    "sha": "e98ba78222547a96ec10a5978c80ece0633fde3a3042a6341d1aa49212c862c5",
+    "verify": true
+  },
+  "snowflake_connector_python-3.5.0-pp39-pypy39_pp73-win_amd64.whl": {
+    "sha": "e6f57f4afd1f2a1572768293da8ba882ce2bbe54a5682f9d91a05dbdc84807f9",
+    "verify": true
+  },
+  "SQLAlchemy-1.4.50-pp310-pypy310_pp73-win_amd64.whl": {
+    "sha": "70e555d76d5accffe941d4d6f91b9f630c9e26f7296bd056671d31a48af50183",
+    "verify": true
+  },
+  "SQLAlchemy-1.4.50-pp38-pypy38_pp73-win_amd64.whl": {
+    "sha": "f1444358c5982de2dd7909084f91d075b825d5d4789372df8e5a3e2549f5c86e",
+    "verify": true
+  },
+  "SQLAlchemy-1.4.50-pp39-pypy39_pp73-win_amd64.whl": {
+    "sha": "ffdfa0783efe78ab4a2ad7391ce1ae0e5d3f7171748578889a1c16995da130e0",
+    "verify": true
+  },
+  "tokenizers-0.15.0-pp310-pypy310_pp73-win_amd64.whl": {
+    "sha": "3a59756a6b1f50d09ac32adf84ce849d1e65817bfd0fdfba40ed9500de1bbe00",
+    "verify": true
+  },
+  "tokenizers-0.15.0-pp37-pypy37_pp73-win_amd64.whl": {
+    "sha": "551cd9fba535a7b71266c1d220765282391081f18af629bcf7da1387ee973d35",
+    "verify": true
+  },
+  "tokenizers-0.15.0-pp38-pypy38_pp73-win_amd64.whl": {
+    "sha": "0614f78fbb8a1859441128027a01ac110e3206bbdea61c8440888baf832bd321",
+    "verify": true
+  },
+  "tokenizers-0.15.0-pp39-pypy39_pp73-win_amd64.whl": {
+    "sha": "800a645ea29efa63db2d76d1ccf7dad280cf1537887ed52bb1fc33751d5fa24a",
+    "verify": true
+  }
+}

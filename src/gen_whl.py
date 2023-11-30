@@ -132,7 +132,8 @@ def gen_html_cdn():
 
 def save_sha256sums():
     with open(f'{whl_dir}/data/{sha_file}', 'w', encoding='utf-8') as json_file:
-        json.dump(saved_sha256sums, json_file)
+        # for better git
+        json.dump(saved_sha256sums, json_file, indent=2)
 
 
 if __name__ == '__main__':

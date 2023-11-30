@@ -182,7 +182,7 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
         load = get_load()
         while load > 4:
             pbar.write(f'Load: {load} > 4, waiting...')
-            time.sleep(5)
+            time.sleep(60)
             load = get_load()
         try:
             pbar.write(f'Now running {command}')

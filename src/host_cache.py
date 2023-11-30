@@ -17,7 +17,9 @@ def get_local_whl_list():
 
 
 def gen_html():
+    print('Generating HTML...')
     whl_list = get_local_whl_list()
+    print(f'Found {len(whl_list)} wheels.')
     whl_list.sort(key=lambda x: x[0])
 
     html_head = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Wheels</title></head><body>\n'

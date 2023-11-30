@@ -62,7 +62,7 @@ def gen_index():
             pkgs[pkg_name].append((pkg_filename, line))
 
     for pkg in pkgs:
-        check_official(pkg)
+        # check_official(pkg)
         pkgs[pkg].sort(key=lambda x: x[0])
         os.makedirs(f'{index_dir}/{pkg}', exist_ok=True)
         with open(f'{index_dir}/{pkg}/index.html', 'w', encoding='utf-8') as f:
@@ -94,6 +94,8 @@ def gen_index():
             f.write(f'<a href="{pkg}">{pkg}</a><br>\n')
         f.write('</body></html>')
 
+    return pkgs
+
 
 def gen_cdn_index():
     shutil.copytree(index_dir, cdn_index_dir)
@@ -109,5 +111,9 @@ def gen_cdn_index():
 
 
 if __name__ == '__main__':
-    gen_index()
+    ps = gen_index()
     gen_cdn_index()
+    if os.name == 'nt':
+        from tqdm import tqdm
+        for p in tqdm(ps):
+            check_official(p)

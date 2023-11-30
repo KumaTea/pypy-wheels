@@ -1,10 +1,12 @@
 import sys
 import shutil
+import logging
 import selectors
 import subprocess
 from config import *
 from tqdm import tqdm
 from versions import PYTHON_TO_PYPY
+from gen_whl import saved_sha256sums
 
 
 def get_pip_cache_dir() -> str:
@@ -53,6 +55,13 @@ def copy_wheels(dst: str):
     for root, file in whl_files:
         if file not in whl_html:
             new_whl.append((root, file))
+        else:
+            if file in saved_sha256sums:
+                logging.warning(f'{file} already exists in saved_sha256sums')
+            else:
+                new_whl.append((root, file))
+                logging.warning(f'{file} already exists in wheels.html')
+                logging.warning(f'You MUST remove old file from releases!!!')
 
     pbar = tqdm(new_whl)
     copied_files = []
@@ -108,6 +117,31 @@ def get_linux_dup():
                     archs.append(arch)
             if len(archs) > 1 and len(list(set(archs))) == 1:
                 print(pkg, pkgs[pkg])
+
+
+def get_name_dup():
+    whl_path = '../whl/wheels.html'
+    if os.name == 'nt':
+        whl_path = './whl/wheels.html'
+    pkgs = {}
+    with open(whl_path, 'r', encoding='utf-8') as f:
+        whl_html = f.read()
+
+    for line in whl_html.split('\n'):
+        if '<a' in line:
+            a_tag_open_start = line.find('<a href="')
+            a_tag_open_end = line.find('">')
+            a_tag_close = line.find('</a>')
+            pkg_filename = line[a_tag_open_end + len('">'):a_tag_close]
+            pkg_url = line[a_tag_open_start + len('<a href="'):a_tag_open_end]
+
+            pkgs[pkg_filename] = pkgs.get(pkg_filename, []) + [pkg_url]
+
+    for name, urls in pkgs.items():
+        if len(urls) > 1:
+            logging.error(f'Duplicated assets: {name}')
+            for url in urls:
+                logging.error(f'\tURL: {url}')
 
 
 def popen_reader_linux(p: subprocess.Popen, pbar: tqdm = None) -> tuple:

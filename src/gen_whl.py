@@ -16,7 +16,7 @@ def get_local_whl_dict(d: list) -> dict:
     return whl_dict
 
 
-LOCAL_WHL_DICT = get_local_whl_dict([WIN_WHEEL_DIR, LINUX_WHEEL_DIR])
+local_whl_dict = get_local_whl_dict([WIN_WHEEL_DIR, LINUX_WHEEL_DIR])
 
 
 def get_saved_sha256sums():
@@ -31,12 +31,12 @@ saved_sha256sums = get_saved_sha256sums()
 
 def get_whl_sha256(name: str):
     if name in saved_sha256sums:
-        return saved_sha256sums[name]
-    if name in LOCAL_WHL_DICT:
-        path = LOCAL_WHL_DICT[name]
+        return saved_sha256sums[name]['sha']
+    if name in local_whl_dict:
+        path = local_whl_dict[name]
         with open(path, 'rb') as f:
             sha256sum = hashlib.sha256(f.read()).hexdigest()
-        saved_sha256sums[name] = sha256sum
+        saved_sha256sums[name] = {'sha': sha256sum, 'verify': False}
         return sha256sum
     return None
 

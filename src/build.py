@@ -99,6 +99,7 @@ def building_reader(pkg_name: str, p: subprocess.Popen, pbar: tqdm = None) -> tu
 
 
 def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: str = None, only: str = None):
+    os.makedirs(f'log/{ver}', exist_ok=True)
     if ver not in build_versions:
         print(f'pypy {ver} not found')
         exit(1)
@@ -186,6 +187,9 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
                 pbar.write(f'{command=}')
                 pbar.write('########## ERROR ##########')
                 # pbar.write(error)
+                with open(f'log/{ver}/{pkg}.log', 'w', encoding='utf-8') as f:
+                    f.write(result + error)
+                pbar.write(f'Log saved to log/{ver}/{pkg}.log')
                 pbar.write('##########  END  ##########')
 
             current_index = packages.index(pkg)

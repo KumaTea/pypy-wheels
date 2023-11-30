@@ -37,9 +37,15 @@ jobs:
         with:
           python-version: '3.12'
 
-      # - name: Install Dependencies
-      #   run: |
-      #     python3 -m pip install requests
+      - name: Install Dependencies
+        run: |
+          python3 -m pip install -r ./src/requirements.txt
+
+      - name: Build CDN
+        run: |
+          cd src
+          python3 gen_whl.py
+          cd ..
 
       - name: Build Index
         run: |

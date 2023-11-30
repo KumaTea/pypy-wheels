@@ -26,6 +26,10 @@ If you have trouble accessing GitHub Pages,
 you may try the CDN hosted by CloudFlare:
 
 ```bash
+pip install <package> --prefer-binary --extra-index-url https://pypy.kmtea.eu/cdn
+```
+
+```bash
 pip install <package> --prefer-binary --find-links https://pypy.kmtea.eu/wheels-cdn.html
 ```
 

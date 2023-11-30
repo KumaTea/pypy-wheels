@@ -137,6 +137,8 @@ def save_sha256sums():
 
 
 if __name__ == '__main__':
-    gen_html()
-    gen_html_cdn()
-    save_sha256sums()
+    if os.name == 'nt':
+        gen_html()
+        save_sha256sums()
+    else:
+        gen_html_cdn()

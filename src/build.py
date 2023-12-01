@@ -170,10 +170,15 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
         force_reinstall_flag = '--force-reinstall'
 
     extra_index_flag = ''
-    with open('/home/kuma/.config/pip/pip.conf', 'r') as f:
-        pip_conf = f.read()
-    if EXTRA_CDN not in pip_conf:
-        extra_index_flag = f'--extra-index-url {EXTRA_INDEX_URL}'
+    if os.name == 'nt':
+        pip_conf_path = os.path.join(os.environ['APPDATA'], 'pip/pip.ini')
+    else:
+        pip_conf_path = os.path.join(os.path.expanduser('~'), '.config/pip/pip.conf')
+    if os.path.exists(pip_conf_path):
+        with open(pip_conf_path, 'r') as f:
+            pip_conf = f.read()
+        if EXTRA_CDN not in pip_conf:
+            extra_index_flag = f'--extra-index-url {EXTRA_INDEX_URL}'
 
     env = os.environ
     pbar = tqdm(packages)
@@ -204,10 +209,13 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
             )
             result, error = building_reader(pkg, p, pbar)
 
+            error_log = f'log/{ver}/{pkg}.log'
             if is_success_build(pkg, result, error):
                 # pbar.write(result)
                 success.append(pkg)
                 count += 1
+                if os.path.isfile(error_log):
+                    os.remove(error_log)
             else:
                 failed.append(pkg)
                 # pbar.write(result)
@@ -218,9 +226,9 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
                 pbar.write(f'{command=}')
                 pbar.write('########## ERROR ##########')
                 # pbar.write(error)
-                with open(f'log/{ver}/{pkg}.log', 'w', encoding='utf-8') as f:
+                with open(error_log, 'w', encoding='utf-8') as f:
                     f.write(result + error)
-                pbar.write(f'Log saved to log/{ver}/{pkg}.log')
+                pbar.write(f'Log saved to {error_log}')
                 pbar.write('##########  END  ##########')
 
             current_index = packages.index(pkg)

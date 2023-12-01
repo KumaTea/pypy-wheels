@@ -65,10 +65,10 @@ export PATH=/opt/rh/devtoolset-10/root/usr/bin:/usr/local/sbin:/usr/local/bin:/u
 export MANPATH=/opt/rh/devtoolset-10/root/usr/share/man
 export INFOPATH=/opt/rh/devtoolset-10/root/usr/share/info
 export PCP_DIR=/opt/rh/devtoolset-10/root
-export C_INCLUDE_PATH=$C_INCLUDE_PATH:/opt/openblas/include
-export CPATH=$CPATH:/opt/openblas/include
-export LIBRARY_PATH=$LIBRARY_PATH:/opt/openblas/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/openblas/lib:/opt/rh/devtoolset-10/root/usr/lib64/dyninst:/opt/rh/devtoolset-10/root/usr/lib/dyninst:/opt/rh/devtoolset-10/root/usr/lib/dyn:/opt/rh/devtoolset-10/root/usr/lib64:/opt/rh/devtoolset-10/root/usr/lib
+export C_INCLUDE_PATH="$C_INCLUDE_PATH:/opt/openblas/include"
+export CPATH="$CPATH:/opt/openblas/include"
+export LIBRARY_PATH="$LIBRARY_PATH:/opt/openblas/lib"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/openblas/lib:/opt/rh/devtoolset-10/root/usr/lib64/dyninst:/opt/rh/devtoolset-10/root/usr/lib/dyninst:/opt/rh/devtoolset-10/root/usr/lib/dyn:/opt/rh/devtoolset-10/root/usr/lib64:/opt/rh/devtoolset-10/root/usr/lib"
 export PKG_CONFIG_PATH=/opt/openblas/lib/pkgconfig:/opt/rh/devtoolset-10/root/usr/lib64/pkgconfig:/usr/local/lib/pkgconfig
 EOF
 
@@ -88,8 +88,12 @@ cd ..
 rm -rvf libpng-1.6.40
 
 # others
-dnf -y install hdf5-devel postgresql-devel llvm14-devel libxml2-devel libxslt-devel unixODBC-devel
-ln -s /usr/bin/llvm-config-14 /usr/bin/llvm-config
+dnf -y install hdf5-devel postgresql-devel libxml2-devel libxslt-devel unixODBC-devel
+
+# llvm
+# RuntimeError: Building llvmlite requires LLVM 11.x.x, got '14.0.5'
+dnf -y install llvm11-devel
+ln -sf /usr/bin/llvm-config-11 /usr/bin/llvm-config
 
 # openblas
 # https://github.com/bgeneto/build-install-compile-openblas

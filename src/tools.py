@@ -1,5 +1,6 @@
 import sys
 import shutil
+import psutil
 import logging
 import selectors
 import subprocess
@@ -197,9 +198,4 @@ def popen_reader(p: subprocess.Popen, pbar: tqdm = None) -> tuple:
 
 
 def get_load() -> float:
-    if os.name == 'nt':
-        return 0.0
-    else:
-        with open('/proc/loadavg', 'r', encoding='utf-8') as f:
-            load = f.read().split()[0]
-        return float(load)
+    return psutil.getloadavg()[0]

@@ -4,10 +4,14 @@ from flask import Flask, send_from_directory
 
 WORKDIR = '/home/kuma'
 HTML_DIR = '/tmp/html'
-CACHE_DIR = '.cache/pip'
+CACHE_DIR = '.cache/pip/wheels'
 
 
 def get_local_whl_list():
+    if not os.path.isdir(f'{WORKDIR}/{CACHE_DIR}'):
+        print('No wheels yet!')
+        return []
+
     whl_list = []
     for root, dirs, files in os.walk(f'{WORKDIR}/{CACHE_DIR}'):
         for file in files:
@@ -46,12 +50,15 @@ def index():
     global req_count
     req_count += 1
     if req_count % 100 == 0:
+        print(f'Requested {req_count} times, regenerating HTML...')
         gen_html()
     return send_from_directory(HTML_DIR, 'index.html')
 
 
 @app.route('/<path:path>')
 def send_whl(path):
+    filename = path.split('/')[-1]
+    print(f'Requested: {filename}')
     return send_from_directory(WORKDIR, path)
 
 

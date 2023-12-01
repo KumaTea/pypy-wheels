@@ -1,3 +1,4 @@
 tqdm
 flask
+psutil
 requests

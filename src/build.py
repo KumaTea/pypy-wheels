@@ -22,6 +22,8 @@ PROJ_URL_LOWER = PROJ_URL.lower()
 EXTRA_INDEX_URL = 'https://pypy.kmtea.eu/simple'
 EXTRA_CDN = 'https://pypy.kmtea.eu/cdn'
 
+load_limit = WIN_MAX_LOAD if os.name == 'nt' else LINUX_MAX_LOAD
+
 
 def is_success_build(pkg_name: str, output: str, error: str = None):
     pkg_name = pkg_name.lower()
@@ -52,7 +54,7 @@ def is_downloading_whl(output: str, pkg_name: str):
         if all([
             # downloading or cached
             PROJ_URL_LOWER in line,
-            pkg_name in line,
+            f'/{pkg_name}-' in line,
             '.whl' in line,
         ]):
             return line
@@ -155,14 +157,23 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
         uninst_all(ver, py_path, plat)
 
     use_local_flag = ''
-    r = requests.get(LOCAL_WHL_LINK)
-    if r.status_code == 200:
-        print('Local cache found!')
-        use_local_flag = f'--find-links {LOCAL_WHL_LINK}'
+    try:
+        r = requests.get(LOCAL_WHL_LINK)
+        if r.status_code == 200:
+            print('Local cache found!')
+            use_local_flag = f'--find-links {LOCAL_WHL_LINK}'
+    except requests.exceptions.ConnectionError:
+        print('Local cache not found, nevermind.')
 
     force_reinstall_flag = ''
     if only:
         force_reinstall_flag = '--force-reinstall'
+
+    extra_index_flag = ''
+    with open('/home/kuma/.config/pip/pip.conf', 'r') as f:
+        pip_conf = f.read()
+    if EXTRA_CDN not in pip_conf:
+        extra_index_flag = f'--extra-index-url {EXTRA_INDEX_URL}'
 
     env = os.environ
     pbar = tqdm(packages)
@@ -174,14 +185,14 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
         command = (
             f'{py_path} -m '
             f'pip install -U -v '
-            f'{force_reinstall_flag} '
             f'{pkg} '
-            f'--extra-index-url {EXTRA_CDN} '
+            f'{force_reinstall_flag} '
+            f'{extra_index_flag} '
             f'{use_local_flag}'
         )
         load = get_load()
-        while load > 4:
-            pbar.write(f'Load: {load} > 4, waiting...')
+        while load > load_limit:
+            pbar.write(f'Load: {load} > {load_limit}, waiting...')
             time.sleep(60)
             load = get_load()
         try:

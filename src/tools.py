@@ -86,45 +86,9 @@ def copy_wheels(dst: str):
     return copied_files
 
 
-def get_linux_dup():
-    whl_path = '../whl/wheels.html'
-    if os.name == 'nt':
-        whl_path = './whl/wheels.html'
-    pkgs = {}
-    with open(whl_path, 'r', encoding='utf-8') as f:
-        whl_html = f.read()
-
-    for line in whl_html.split('\n'):
-        if '<a' in line:
-            open_tag_end = line.find('>')
-            close_tag_start = line.find('</a>')
-            pkg_filename = line[open_tag_end+1:close_tag_start]
-
-            pkg_name = pkg_filename.split('-')[0]
-            pkg_ver = pkg_filename.split('-')[1]
-            pkg_pyver = pkg_filename.split('-')[2]
-
-            if f'{pkg_name}-{pkg_ver}-{pkg_pyver}' not in pkgs:
-                pkgs[f'{pkg_name}-{pkg_ver}-{pkg_pyver}'] = []
-            pkgs[f'{pkg_name}-{pkg_ver}-{pkg_pyver}'].append(pkg_filename)
-
-    for pkg in pkgs:
-        if len(pkgs[pkg]) > 1:
-            archs = []
-            for filename in pkgs[pkg]:
-                arch = filename.split('_')[-1].split('.')[0]
-                plat = filename.split('_')[-2].split('-')[-1]
-                if 'linux' in plat:
-                    archs.append(arch)
-            if len(archs) > 1 and len(list(set(archs))) == 1:
-                print(pkg, pkgs[pkg])
-
-
-def get_name_dup():
-    whl_path = '../whl/wheels.html'
-    if os.name == 'nt':
-        whl_path = './whl/wheels.html'
-    pkgs = {}
+def get_whl_list() -> list:
+    pkgs = []
+    whl_path = f'{whl_dir}/{whl_file}'
     with open(whl_path, 'r', encoding='utf-8') as f:
         whl_html = f.read()
 
@@ -135,8 +99,72 @@ def get_name_dup():
             a_tag_close = line.find('</a>')
             pkg_filename = line[a_tag_open_end + len('">'):a_tag_close]
             pkg_url = line[a_tag_open_start + len('<a href="'):a_tag_open_end]
+            pkgs.append((pkg_filename, pkg_url))
 
-            pkgs[pkg_filename] = pkgs.get(pkg_filename, []) + [pkg_url]
+    return pkgs
+
+
+def get_plat_dup():
+    pkgs = {}
+    whl_list = get_whl_list()
+
+    for pair in whl_list:
+        file, url = pair
+        assert file.count('-') == 4, f'{file} has a wired name!'
+        name, ver, pv_ver, abi, plat = file.split('-')
+
+        if name not in pkgs:
+            pkgs[name] = {}
+        if ver not in pkgs[name]:
+            pkgs[name][ver] = {}
+        if pv_ver not in pkgs[name][ver]:
+            pkgs[name][ver][pv_ver] = {}
+
+        # skip abi
+        if 'linux' in plat:
+            os_type = 'linux'
+        elif 'win' in plat:
+            os_type = 'win'
+        else:
+            os_type = 'none'
+        if os_type not in pkgs[name][ver][pv_ver]:
+            pkgs[name][ver][pv_ver][os_type] = {}
+
+        arch_list = ['x86_64', 'amd64', 'aarch64']
+        for i in arch_list:
+            if i in plat:
+                arch = i
+                break
+        else:
+            arch = 'any'
+        if arch not in pkgs[name][ver][pv_ver][os_type]:
+            pkgs[name][ver][pv_ver][os_type][arch] = []
+
+        pkgs[name][ver][pv_ver][os_type][arch].append(file)
+
+    for pkg in pkgs:
+        for ver in pkgs[pkg]:
+            for pv_ver in pkgs[pkg][ver]:
+                for os_type in pkgs[pkg][ver][pv_ver]:
+                    for arch in pkgs[pkg][ver][pv_ver][os_type]:
+                        if len(pkgs[pkg][ver][pv_ver][os_type][arch]) > 1:
+                            logging.error(f'Duplicated assets: {pkg=} {ver=} {pv_ver=} {os_type=} {arch=}')
+                            for file in pkgs[pkg][ver][pv_ver][os_type][arch]:
+                                logging.error(f'\tURL: {file}')
+
+    return pkgs
+
+
+def get_exact_dup():
+    pkgs = {}
+    whl_list = get_whl_list()
+
+    for pair in whl_list:
+        file, url = pair
+        pkg_filename = file
+        pkg_url = url
+
+        pkgs[pkg_filename] = pkgs.get(pkg_filename, []) + [pkg_url]
 
     for name, urls in pkgs.items():
         if len(urls) > 1:

@@ -2,9 +2,14 @@ import os
 from flask import Flask, send_from_directory
 
 
-WORKDIR = '/home/kuma'
-HTML_DIR = '/tmp/html'
-CACHE_DIR = '.cache/pip/wheels'
+if os.name == 'nt':
+    WORKDIR = os.path.expanduser('~')
+    HTML_DIR = 'E:/Cache/pypy/html'
+    CACHE_DIR = 'AppData/Local/pip/cache/wheels'
+else:
+    WORKDIR = '/home/kuma'
+    HTML_DIR = '/tmp/html'
+    CACHE_DIR = '.cache/pip/wheels'
 
 
 def get_local_whl_list():

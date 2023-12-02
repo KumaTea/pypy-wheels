@@ -6,7 +6,7 @@ def get_pypy(ver: str):
     return f'/opt/python/pp{ver.replace(".", "")}-pypy{ver.replace(".", "")}_pp73/bin/python3'
 
 
-def build_linux(ver: str = None, since: str = None, until: str = None, only: str = None):
+def build_linux(ver: str = None, since: str = None, until: str = None, only: str = None, retry: bool = False):
     if not ver:
         ver = args.ver
     if ver not in build_versions:
@@ -22,7 +22,8 @@ def build_linux(ver: str = None, since: str = None, until: str = None, only: str
         plat=plat,
         since=since,
         until=until,
-        only=only
+        only=only,
+        retry=retry
     )
 
 
@@ -31,5 +32,6 @@ if __name__ == '__main__':
         ver=args.ver,
         since=args.since,
         until=args.until,
-        only=args.only
+        only=args.only,
+        retry=args.retry
     )

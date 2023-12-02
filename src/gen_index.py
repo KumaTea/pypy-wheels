@@ -1,6 +1,7 @@
 import os
 import shutil
 import logging
+from tools import get_whl_list
 from urllib.request import urlopen
 from urllib.error import HTTPError, URLError
 
@@ -43,23 +44,18 @@ def gen_index():
     with open(whl_path, 'r', encoding='utf-8') as f:
         whl_html = f.read()
 
-    for line in whl_html.split('\n'):
-        if '<a' in line:
-            # a_tag_open_start = line.find('<a href="')
-            a_tag_open_end = line.find('">')
-            a_tag_close = line.find('</a>')
-            pkg_filename = line[a_tag_open_end + len('">'):a_tag_close]
-            # pkg_url = line[a_tag_open_start + len('<a href="'):a_tag_open_end]
-            pkg_name = pkg_filename.split('-')[0]
+    whl_list = get_whl_list()
+    for pair in whl_list:
+        filename, url = pair
+        pkg_name = filename.split('-')[0]
 
-            # process package name
-            pkg_name = pkg_name.replace('_', '-')
-            pkg_name = pkg_name.replace('.', '-')
-            pkg_name = pkg_name.lower()
+        # process package name
+        pkg_name = pkg_name.replace('_', '-')
+        pkg_name = pkg_name.replace('.', '-')
+        pkg_name = pkg_name.lower()
+        pkg_html = f'<a href="{url}">{filename}</a>'
 
-            if pkg_name not in pkgs:
-                pkgs[pkg_name] = []
-            pkgs[pkg_name].append((pkg_filename, line))
+        pkgs[pkg_name] = pkgs.get(pkg_name, []) + [(filename, pkg_html)]
 
     for pkg in pkgs:
         # check_official(pkg)

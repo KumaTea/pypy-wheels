@@ -14,6 +14,7 @@ arg.add_argument('-V', '--ver', help='pypy version')
 arg.add_argument('-s', '--since', help='start from this package')
 arg.add_argument('-u', '--until', help='end at this package')
 arg.add_argument('-O', '--only', help='only build this package')
+arg.add_argument('-R', '--retry', help='retry failed packages')
 args = arg.parse_args()
 
 PYPI_MIRROR = 'mirrors.sustech.edu.cn'
@@ -102,23 +103,30 @@ def building_reader(pkg_name: str, p: subprocess.Popen, pbar: tqdm = None) -> tu
     return result, error
 
 
-def gen_packages(plat: str = 'win', since: str = None, until: str = None, only: str = None):
+def gen_packages(
+        plat: str = 'win',
+        since: str = None, until: str = None,
+        only: str = None,
+        retry: bool = False, ver: str = None
+):
     if only:
         print(f'Building {only}...')
         packages = [only]
-        until_index = 1
+    elif retry:
+        failed_logs = os.listdir(f'log/{ver}')
+        packages = [i[:-4] for i in failed_logs]
     else:
-        with open('../packages.txt', 'r') as f:
+        with open(f'{pkg_dir}/packages.txt', 'r') as f:
             packages = f.read().splitlines()
 
         if 'win' in plat:
-            with open('../pkgs_win.txt', 'r') as f:
+            with open(f'{pkg_dir}/pkgs_win.txt', 'r') as f:
                 packages = packages + f.read().splitlines()
         elif 'linux' in plat:
-            with open('../pkgs_linux.txt', 'r') as f:
+            with open(f'{pkg_dir}/pkgs_linux.txt', 'r') as f:
                 packages = packages + f.read().splitlines()
 
-        with open('../pkgs_in.txt', 'r') as f:
+        with open(f'{pkg_dir}/pkgs_in.txt', 'r') as f:
             packages = packages + f.read().splitlines()
 
         # packages = list(set(packages))
@@ -130,25 +138,30 @@ def gen_packages(plat: str = 'win', since: str = None, until: str = None, only: 
             if index > 0:
                 packages = ['NotARealPackage'] * index + packages[index:]
 
-        if until:
-            if until.isdigit():
-                until_index = int(until)
-            else:
-                until_index = packages.index(until)
+    if until:
+        if until.isdigit():
+            until_index = int(until)
         else:
-            until_index = len(packages)
+            until_index = packages.index(until)
+    else:
+        until_index = len(packages)
 
     return packages, until_index
 
 
-def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: str = None, only: str = None):
+def build(
+        ver: str, py_path: str, plat: str = 'win',
+        since: str = None, until: str = None,
+        only: str = None,
+        retry: bool = False
+):
     os.makedirs(f'log/{ver}', exist_ok=True)
     if ver not in build_versions:
         print(f'pypy {ver} not found')
         exit(1)
 
     print(f'Building wheels for pypy {ver}...')
-    packages, until_index = gen_packages(plat, since, until, only)
+    packages, until_index = gen_packages(plat, since, until, only, retry, ver)
     success = []
     failed = []
 
@@ -200,6 +213,7 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
             pbar.write(f'Load: {load} > {load_limit}, waiting...')
             time.sleep(60)
             load = get_load()
+        pbar.write(f'Load: {load} < {load_limit}, start!')
         try:
             pbar.write(f'Now running {command}')
             p = subprocess.Popen(
@@ -211,11 +225,13 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
 
             error_log = f'log/{ver}/{pkg}.log'
             if is_success_build(pkg, result, error):
-                # pbar.write(result)
+                pbar.write('########## SUCCESS ##########')
                 success.append(pkg)
                 count += 1
                 if os.path.isfile(error_log):
                     os.remove(error_log)
+                    pbar.write(f'Removed {error_log}')
+                pbar.write('##########  END  ##########')
             else:
                 failed.append(pkg)
                 # pbar.write(result)
@@ -253,7 +269,7 @@ def build(ver: str, py_path: str, plat: str = 'win', since: str = None, until: s
     return success, failed
 
 
-NO_UNINST = ['pip', 'setuptools', 'wheel']
+NO_UNINST = ['pip', 'setuptools', 'wheel', 'certifi']
 
 
 def uninst_all(ver: str, py_path: str, plat: str = 'win', upper_pbar: tqdm = None):

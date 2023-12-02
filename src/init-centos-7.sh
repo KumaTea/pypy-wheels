@@ -74,34 +74,49 @@ EOF
 
 # ====== BUILD DEPS ======
 
-dnf install autogen bash ca-certificates centos-release-scl cmake curl gettext git libffi-devel libjpeg-devel nano ninja-build openssl-devel wget xz zlib-devel
+sudo dnf install autogen bash ca-certificates centos-release-scl cmake curl gettext git libffi-devel libjpeg-devel nano ninja-build openssl-devel wget xz zlib-devel
 
 # Pillow
+cd /tmp
 wget https://sourceforge.net/projects/libpng/files/libpng16/1.6.40/libpng-1.6.40.tar.xz/download -O libpng-1.6.40.tar.xz
 tar -xJf libpng-1.6.40.tar.xz
-rm -f libpng-1.6.40.tar.xz
 cd libpng-1.6.40
 ./configure --enable-shared
 make
-make install
+sudo make install
 cd ..
-rm -rvf libpng-1.6.40
+rm -rvf libpng-1.6.40 libpng-1.6.40.tar.xz
 
 # others
-dnf -y install hdf5-devel postgresql-devel libxml2-devel libxslt-devel unixODBC-devel
+sudo dnf -y install postgresql-devel libxml2-devel libxslt-devel unixODBC-devel librdkafka-devel freetds-devel
+
+# hdf5
+# Exception: This version of h5py requires HDF5 >= 1.10.4 (got version (1, 8, 12) from environment variable or library)
+cd /tmp
+wget https://gh.kmtea.eu/https://github.com/HDFGroup/hdf5/releases/download/hdf5-1_12_3/hdf5-1_12_3.tar.gz
+tar xvzf hdf5-1_12_3.tar.gz
+cd hdfsrc
+./configure --prefix=/opt/hdf5 --enable-fortran --enable-cxx
+make
+sudo dnf -y install gcc-c++ gcc-gfortran
+sudo make install
+sudo dnf -y remove gcc-c++ gcc-gfortran
+cd ..
+rm -rvf hdfsrc hdf5-1_12_3.tar.gz
 
 # llvm
 # RuntimeError: Building llvmlite requires LLVM 11.x.x, got '14.0.5'
-dnf -y install llvm11-devel
-ln -sf /usr/bin/llvm-config-11 /usr/bin/llvm-config
+sudo dnf -y install llvm11-devel
+sudo ln -sf /usr/bin/llvm-config-11-64 /usr/bin/llvm-config
 
 # openblas
 # https://github.com/bgeneto/build-install-compile-openblas
 export OPENBLAS_DIR=/opt/openblas
 sudo mkdir $OPENBLAS_DIR
 cd /tmp
-git clone https://github.com/xianyi/OpenBLAS
-cd OpenBLAS
+wget https://gh.kmtea.eu/https://github.com/OpenMathLib/OpenBLAS/releases/download/v0.3.25/OpenBLAS-0.3.25.tar.gz
+tar xvzf OpenBLAS-0.3.25.tar.gz
+cd OpenBLAS-0.3.25
 export USE_THREAD=1
 export NUM_THREADS=64
 export DYNAMIC_ARCH=0
@@ -114,7 +129,7 @@ export FCFLAGS="-O2 -march=native"
 make -j DYNAMIC_ARCH=0 CC=gcc FC=gfortran HOSTCC=gcc BINARY=64 INTERFACE=64 USE_OPENMP=1 LIBNAMESUFFIX=openmp
 sudo make PREFIX=$OPENBLAS_DIR LIBNAMESUFFIX=openmp install
 cd ..
-rm -rvf OpenBLAS
+rm -rvf OpenBLAS-0.3.25 OpenBLAS-0.3.25.tar.gz
 # numpy
 sudo ln -s /opt/openblas/lib/libopenblas_openmp.a /opt/openblas/lib/libopenblas.a
 sudo ln -s /opt/openblas/lib/libopenblas_openmp.so /opt/openblas/lib/libopenblas.so
@@ -132,7 +147,7 @@ cmake -DCMAKE_BUILD_TYPE=Release ..
 cmake --build .
 sudo cmake --build . --target install
 cd ..
-rm -rvf geos-3.12.1
+rm -rvf geos-3.12.1 geos-3.12.1.tar.bz2
 
 # arrow
 # https://arrow.apache.org/install/
@@ -152,7 +167,7 @@ tar xvzf openssl-1.1.1w.tar.gz
 cd openssl-1.1.1w
 ./config --prefix=/usr --openssldir=/etc/ssl
 make
-make install
+sudo make install
 cd ..
 rm -rvf openssl-1.1.1w.tar.gz openssl-1.1.1w
 openssl version
@@ -171,4 +186,4 @@ cp -rvf ./usr/* /usr/
 rm -rvf usr pypy3.10.tar.gz pypy3.9.tar.gz pypy3.8.tar.gz
 # rm -f /lib64/libpypy*
 
-ldconfig
+sudo ldconfig

@@ -8,11 +8,11 @@ import requests
 
 DATA_URL = 'https://hugovk.github.io/top-pypi-packages/top-pypi-packages-30-days.min.json'
 
-packages_file = '../packages.txt'
-linux_packages_file = '../pkgs_linux.txt'
-windows_packages_file = '../pkgs_win.txt'
-excluded_packages_file = '../pkgs_ex.txt'
-included_packages_file = '../pkgs_in.txt'
+packages_file = '../pkg/packages.txt'
+linux_packages_file = '../pkg/pkgs_linux.txt'
+windows_packages_file = '../pkg/pkgs_win.txt'
+excluded_packages_file = '../pkg/pkgs_ex.txt'
+included_packages_file = '../pkg/pkgs_in.txt'
 
 
 excluded_packages = [

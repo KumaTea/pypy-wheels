@@ -2,27 +2,19 @@ import hashlib
 import logging
 import requests
 from tqdm import tqdm
+from tools import get_whl_list
 from gen_whl import saved_sha256sums, save_sha256sums
-
-
-whl_path = '../whl/wheels.html'
-with open(whl_path, 'r', encoding='utf-8') as f:
-    whl_html = f.read()
 
 
 def get_sha_pkgs():
     pkgs = []
+    whl_list = get_whl_list()
 
-    for line in whl_html.split('\n'):
-        if '<a' in line:
-            a_tag_open_start = line.find('<a href="')
-            a_tag_open_end = line.find('">')
-            a_tag_close = line.find('</a>')
-            pkg_filename = line[a_tag_open_end + len('">'):a_tag_close]
-            pkg_url = line[a_tag_open_start + len('<a href="'):a_tag_open_end]
+    for pair in whl_list:
+        file, url = pair
+        if '#sha256=' in url:
+            pkgs.append(pair)
 
-            if '#sha256=' in pkg_url:
-                pkgs.append((pkg_filename, pkg_url))
     return pkgs
 
 
@@ -48,8 +40,10 @@ def sha_check(filename: str, url: str, pbar: tqdm):
 
 
 def remove_obsolete():
+    whl_list = get_whl_list()
+    all_filenames = [pair[0] for pair in whl_list]
     for filename in saved_sha256sums.copy():
-        if filename not in whl_html:
+        if filename not in all_filenames:
             logging.warning(f'{filename} not found in wheels.html!')
             saved_sha256sums.pop(filename)
 

@@ -19,24 +19,24 @@ def get_local_whl_dict(d: list) -> dict:
 local_whl_dict = get_local_whl_dict([LINUX_WHEEL_DIR, WIN_WHEEL_DIR])
 
 
-def get_saved_sha256sums():
+def get_saved_hash():
     if os.path.exists(f'{whl_dir}/data/{sha_file}'):
         with open(f'{whl_dir}/data/{sha_file}', 'r', encoding='utf-8') as json_file:
             return json.load(json_file)
     return {}
 
 
-saved_sha256sums = get_saved_sha256sums()
+saved_hash = get_saved_hash()
 
 
 def get_whl_sha256(name: str):
-    if name in saved_sha256sums:
-        return saved_sha256sums[name]['sha']
+    if name in saved_hash:
+        return saved_hash[name]['sha']
     if name in local_whl_dict:
         path = local_whl_dict[name]
         with open(path, 'rb') as f:
             sha256sum = hashlib.sha256(f.read()).hexdigest()
-        saved_sha256sums[name] = {'sha': sha256sum, 'verify': False}
+        saved_hash[name] = {'sha': sha256sum, 'verify': False}
         return sha256sum
     return None
 
@@ -130,15 +130,16 @@ def gen_html_cdn():
         html_file.write(html.replace('https://github.com/', 'https://gh.kmtea.eu/https://github.com/'))
 
 
-def save_sha256sums():
+def save_sha(sums: dict):
+    sums = dict(sorted(sums.items(), key=lambda x: x[0].lower()))
     with open(f'{whl_dir}/data/{sha_file}', 'w', encoding='utf-8') as json_file:
         # for better git
-        json.dump(saved_sha256sums, json_file, indent=2)
+        json.dump(sums, json_file, indent=2)
 
 
 if __name__ == '__main__':
     if os.name == 'nt':
         gen_html()
-        save_sha256sums()
+        save_sha(saved_hash)
     else:
         gen_html_cdn()

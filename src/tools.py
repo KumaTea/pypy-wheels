@@ -6,7 +6,7 @@ import selectors
 import subprocess
 from config import *
 from tqdm import tqdm
-from gen_whl import saved_sha256sums
+from gen_whl import saved_hash
 from config_ver import PYTHON_TO_PYPY
 
 
@@ -57,7 +57,7 @@ def copy_wheels(dst: str):
         if file not in whl_html:
             new_whl.append((root, file))
         else:
-            if file in saved_sha256sums:
+            if file in saved_hash:
                 logging.warning(f'Skip: \t{file} already exists in saved_sha256sums')
             else:
                 new_whl.append((root, file))

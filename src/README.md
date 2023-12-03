@@ -1,5 +1,9 @@
 # SOP Checklist
 
+## Build
+
+## Upload
+
 1. (pypy docker) `python3 copy_whls.py`
 2. (pypy docker) `python3 build_many.py`
 3. (pypy host) `cp -rvf whl /mnt/hdd/Temp/`

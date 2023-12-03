@@ -210,10 +210,10 @@ def build(
         )
         load = get_load()
         while load > load_limit:
-            pbar.write(f'Load: {load} > {load_limit}, waiting...')
+            pbar.write(f'Load: {load:.2f} > {load_limit}, waiting...')
             time.sleep(60)
             load = get_load()
-        pbar.write(f'Load: {load} < {load_limit}, start!')
+        pbar.write(f'Load: {load:.2f} < {load_limit}, start!')
         try:
             pbar.write(f'Now running {command}')
             p = subprocess.Popen(
@@ -255,6 +255,10 @@ def build(
                 pbar.write('Built 100 packages. Uninstall all.')
                 count = 0
                 uninst_all(ver, py_path, plat, pbar)
+            elif 'dependency conflicts' in result + error:
+                pbar.write('Found dependency conflicts! Uninstall all.')
+                count = 0
+                uninst_all(ver, py_path, plat, pbar)
         except KeyboardInterrupt:
             pbar.write('Exiting...')
             pbar.write(f'{success=}')
@@ -269,7 +273,11 @@ def build(
     return success, failed
 
 
-NO_UNINST = ['pip', 'setuptools', 'wheel', 'certifi']
+NO_UNINST = [
+    'pip', 'setuptools', 'wheel',
+    'certifi', 'wrapt',
+    'semantic_version'
+]
 
 
 def uninst_all(ver: str, py_path: str, plat: str = 'win', upper_pbar: tqdm = None):

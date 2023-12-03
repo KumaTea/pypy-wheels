@@ -88,7 +88,20 @@ cd ..
 rm -rvf libpng-1.6.40 libpng-1.6.40.tar.xz
 
 # others
-sudo dnf -y install postgresql-devel libxml2-devel libxslt-devel unixODBC-devel librdkafka-devel freetds-devel
+sudo dnf -y install postgresql-devel libxml2-devel libxslt-devel unixODBC-devel freetds-devel
+
+# 
+# error "confluent-kafka-python requires librdkafka v2.3.0 or later.
+cd /tmp
+wget https://gh.kmtea.eu/https://github.com/confluentinc/librdkafka/archive/refs/tags/v2.3.0.tar.gz
+tar xvzf v2.3.0.tar.gz
+cd librdkafka-2.3.0
+sudo ln -s /opt/python/cp312-cp312/bin/python3 /usr/bin/python3
+./configure
+make
+sudo make install
+cd ..
+rm -rvf librdkafka-2.3.0 v2.3.0.tar.gz
 
 # hdf5
 # Exception: This version of h5py requires HDF5 >= 1.10.4 (got version (1, 8, 12) from environment variable or library)

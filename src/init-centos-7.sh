@@ -13,6 +13,7 @@ sed -e 's!^metalink=!#metalink=!g' -e 's!^#baseurl=!baseurl=!g' -e 's!https\?://
 
 # adduser kuma
 # passwd kuma
+# chown -R kuma:kuma /home/kuma
 
 # ====== TOOLS ======
 
@@ -39,7 +40,7 @@ if status is-interactive
 end
 
 source /opt/rh/devtoolset-10/enable.fish
-export PATH="/home/kuma/.cargo/bin:$PATH"
+export PATH="/home/kuma/.cargo/bin:\$PATH"
 
 alias python='/usr/local/bin/python3.12'
 alias python3='/usr/local/bin/python3.12'
@@ -51,7 +52,7 @@ alias kuma='su kuma'
 alias sudo='/usr/bin/sudo'
 alias apt='dnf'
 EOF
-cp /home/kuma/.config/fish/config.fish .config/fish/config.fish
+ln -sf /home/kuma/.config/fish/config.fish .config/fish/config.fish
 
 cat << EOF >> .bashrc
 source /opt/rh/devtoolset-10/enable
@@ -65,16 +66,16 @@ export PATH=/opt/rh/devtoolset-10/root/usr/bin:/usr/local/sbin:/usr/local/bin:/u
 export MANPATH=/opt/rh/devtoolset-10/root/usr/share/man
 export INFOPATH=/opt/rh/devtoolset-10/root/usr/share/info
 export PCP_DIR=/opt/rh/devtoolset-10/root
-export C_INCLUDE_PATH="$C_INCLUDE_PATH:/opt/openblas/include"
-export CPATH="$CPATH:/opt/openblas/include"
-export LIBRARY_PATH="$LIBRARY_PATH:/opt/openblas/lib"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/openblas/lib:/opt/rh/devtoolset-10/root/usr/lib64/dyninst:/opt/rh/devtoolset-10/root/usr/lib/dyninst:/opt/rh/devtoolset-10/root/usr/lib/dyn:/opt/rh/devtoolset-10/root/usr/lib64:/opt/rh/devtoolset-10/root/usr/lib"
+export C_INCLUDE_PATH="\$C_INCLUDE_PATH:/opt/openblas/include"
+export CPATH="\$CPATH:/opt/openblas/include"
+export LIBRARY_PATH="\$LIBRARY_PATH:/opt/openblas/lib"
+export LD_LIBRARY_PATH="\$LD_LIBRARY_PATH:/opt/openblas/lib:/opt/rh/devtoolset-10/root/usr/lib64/dyninst:/opt/rh/devtoolset-10/root/usr/lib/dyninst:/opt/rh/devtoolset-10/root/usr/lib/dyn:/opt/rh/devtoolset-10/root/usr/lib64:/opt/rh/devtoolset-10/root/usr/lib"
 export PKG_CONFIG_PATH=/opt/openblas/lib/pkgconfig:/opt/rh/devtoolset-10/root/usr/lib64/pkgconfig:/usr/local/lib/pkgconfig
 EOF
 
 # ====== BUILD DEPS ======
 
-sudo dnf install autogen bash ca-certificates centos-release-scl cmake curl gettext git libffi-devel libjpeg-devel nano ninja-build openssl-devel wget xz zlib-devel
+sudo dnf install -y autogen bash ca-certificates centos-release-scl cmake curl gettext git libffi-devel libjpeg-devel nano ninja-build openssl-devel wget xz zlib-devel
 
 # Pillow
 cd /tmp
@@ -88,7 +89,7 @@ cd ..
 rm -rvf libpng-1.6.40 libpng-1.6.40.tar.xz
 
 # others
-sudo dnf -y install postgresql-devel libxml2-devel libxslt-devel unixODBC-devel freetds-devel
+sudo dnf install -y postgresql-devel libxml2-devel libxslt-devel unixODBC-devel freetds-devel
 
 # 
 # error "confluent-kafka-python requires librdkafka v2.3.0 or later.
@@ -197,6 +198,6 @@ tar xvzf pypy3.9.tar.gz
 tar xvzf pypy3.8.tar.gz
 cp -rvf ./usr/* /usr/
 rm -rvf usr pypy3.10.tar.gz pypy3.9.tar.gz pypy3.8.tar.gz
-# rm -f /lib64/libpypy*
+# rm -vf /lib64/libpypy*
 
 sudo ldconfig

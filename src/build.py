@@ -305,7 +305,7 @@ def uninst_all(ver: str, py_path: str, plat: str = 'win', upper_pbar: tqdm = Non
 
     # ensure tools
     p = subprocess.Popen(
-        f'{py_path} -m pip install pip setuptools wheel'.split(),
+        f'{py_path} -m pip install'.split() + NO_UNINST,
         stdout=subprocess.PIPE, stderr=subprocess.PIPE
     )
     popen_reader(p)

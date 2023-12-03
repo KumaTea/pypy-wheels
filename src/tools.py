@@ -6,8 +6,8 @@ import selectors
 import subprocess
 from config import *
 from tqdm import tqdm
-from versions import PYTHON_TO_PYPY
 from gen_whl import saved_sha256sums
+from config_ver import PYTHON_TO_PYPY
 
 
 def get_pip_cache_dir() -> str:

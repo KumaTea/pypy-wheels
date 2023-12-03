@@ -16,7 +16,7 @@ def get_local_whl_dict(d: list) -> dict:
     return whl_dict
 
 
-local_whl_dict = get_local_whl_dict([WIN_WHEEL_DIR, LINUX_WHEEL_DIR])
+local_whl_dict = get_local_whl_dict([LINUX_WHEEL_DIR, WIN_WHEEL_DIR])
 
 
 def get_saved_sha256sums():

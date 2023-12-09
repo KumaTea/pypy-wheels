@@ -50,7 +50,7 @@ def add_sha256_to_url(name: str, url: str):
 
 def save_release(project: str, tag: str, data):
     with open(f'{whl_dir}/data/{project}-{tag}.json', 'w', encoding='utf-8') as json_file:
-        json.dump(data, json_file)
+        json.dump(data, json_file, indent=2)
 
 
 def load_release(filename: str):

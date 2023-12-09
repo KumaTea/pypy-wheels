@@ -41,8 +41,6 @@ def check_official(pkg_name: str) -> bool:
 
 def gen_index():
     pkgs = {}
-    with open(whl_path, 'r', encoding='utf-8') as f:
-        whl_html = f.read()
 
     whl_list = get_whl_list()
     for pair in whl_list:
@@ -73,7 +71,7 @@ def gen_index():
                 f'<h1>Links for {pkg}</h1>\n'
             )
             for pkg_filename, line in pkgs[pkg]:
-                f.write(line + '\n')
+                f.write(line + '<br>\n')
             f.write('</body></html>')
 
     with open(f'{index_dir}/index.html', 'w', encoding='utf-8') as f:

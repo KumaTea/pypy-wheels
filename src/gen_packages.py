@@ -16,14 +16,28 @@ included_packages_file = '../pkg/pkgs_in.txt'
 
 
 excluded_packages = [
+    # ML
     'torch',
     'tensorflow',
+
+    # GPU
+    'nvidia',
+    'cuda',
     'cudnn',
+
+    # Commercial / Cloud
     'aws',
+    'amazon',
+    'boto',
+    's3',
     'azure',
     'google',
     'gcloud',
-    'boto'
+    'gcp',
+
+    # Others
+    'no-manylinux',
+    # 'nightly',
 ]
 
 linux_only_packages = [
@@ -31,7 +45,7 @@ linux_only_packages = [
 ]
 
 windows_only_packages = [
-
+    'win32',
 ]
 
 include_packages = [
@@ -73,12 +87,14 @@ def gen_packages(packages: list = None) -> tuple[list[str], list[str], list[str]
 
     # linux and windows
     for to_check in packages.copy():
-        if to_check in linux_only_packages:
-            linux.append(to_check)
-            packages.remove(to_check)
-        elif to_check in windows_only_packages:
-            windows.append(to_check)
-            packages.remove(to_check)
+        for to_exclude in linux_only_packages:
+            if to_exclude in to_check:
+                linux.append(to_check)
+                packages.remove(to_check)
+        for to_exclude in windows_only_packages:
+            if to_exclude in to_check:
+                windows.append(to_check)
+                packages.remove(to_check)
 
     # common
     common = packages

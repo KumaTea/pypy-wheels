@@ -30,6 +30,14 @@ def get_pypy_link(ver: str, plat='win64') -> str:
     return url.format(py_ver=ver, pypy_ver=PYTHON_TO_PYPY[ver], plat=plat, ext=ext)
 
 
+def is_good_whl(filename: str) -> bool:
+    bl = ['nightly']
+    for i in bl:
+        if i in filename:
+            return False
+    return filename.endswith('.whl')
+
+
 def copy_wheels(dst: str):
     logging.info(f'Copying wheels for pypy...')
     pip_cache_dir = get_pip_cache_dir()
@@ -45,7 +53,7 @@ def copy_wheels(dst: str):
     whl_files = []
     for root, dirs, files in os.walk(pip_cache_dir):
         for file in files:
-            if file.endswith('.whl'):
+            if is_good_whl(file):
                 whl_files.append((root, file))
     
     with open('../whl/wheels.html', 'r', encoding='utf-8') as f:

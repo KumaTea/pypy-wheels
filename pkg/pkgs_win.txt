@@ -1,0 +1,6 @@
+pywin32
+pywin32-ctypes
+pypiwin32
+python-certifi-win32
+win32-setctime
+types-pywin32

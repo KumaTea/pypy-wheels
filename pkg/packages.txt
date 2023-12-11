@@ -4,7 +4,6 @@ certifi
 setuptools
 typing-extensions
 charset-normalizer
-s3transfer
 wheel
 packaging
 idna
@@ -24,7 +23,6 @@ fsspec
 pytz
 pyasn1
 pandas
-s3fs
 markupsafe
 pyjwt
 rsa
@@ -599,7 +597,6 @@ constructs
 pytest-timeout
 iso8601
 cairocffi
-nvidia-nvjitlink-cu12
 catalogue
 einops
 knack
@@ -630,11 +627,9 @@ qtconsole
 partd
 functions-framework
 flask-limiter
-apache-airflow-providers-amazon
 geopy
 hpack
 cron-descriptor
-pywin32
 pyperclip
 kfp-pipeline-spec
 kfp-server-api
@@ -668,13 +663,11 @@ onnx
 bytecode
 jaydebeapi
 pytest-html
-types-s3transfer
 crcmod
 requests-mock
 geographiclib
 diskcache
 pydot
-nvidia-cublas-cu12
 pytest-rerunfailures
 graphframes
 marshmallow-sqlalchemy
@@ -690,26 +683,17 @@ geoip2
 cssselect2
 asyncio
 pyserial
-nvidia-cuda-runtime-cu12
 graphql-core
-nvidia-cuda-nvrtc-cu12
 ua-parser
 grpcio-health-checking
-nvidia-cuda-cupti-cu12
 statsd
 distributed
 python-docx
-nvidia-cufft-cu12
-nvidia-nccl-cu12
-nvidia-cusparse-cu12
 junit-xml
-nvidia-cusolver-cu12
 parameterized
 scandir
-nvidia-curand-cu12
 gensim
 spark-nlp
-nvidia-nvtx-cu12
 keras-applications
 lark
 onnxruntime
@@ -745,7 +729,6 @@ datadog-api-client
 databricks-sdk
 locket
 timm
-nvidia-cublas-cu11
 gradio
 voluptuous
 xarray
@@ -764,14 +747,12 @@ dbt-postgres
 django-filter
 markdown2
 nbclassic
-nvidia-cuda-runtime-cu11
 hologram
 pytest-forked
 ftfy
 langcodes
 async-generator
 python-editor
-nvidia-cuda-nvrtc-cu11
 spacy-legacy
 korean-lunar-calendar
 cog
@@ -955,7 +936,6 @@ pyrestcli
 netcdf4
 ciso8601
 librosa
-nvidia-ml-py
 hatch-vcs
 flask-bootstrap
 pydantic-settings
@@ -973,7 +953,6 @@ pymdown-extensions
 cftime
 pathvalidate
 django-debug-toolbar
-pywin32-ctypes
 launchdarkly-server-sdk
 wget
 types-pyopenssl
@@ -1042,19 +1021,13 @@ pydeck
 snuggs
 funcy
 xmlschema
-nvidia-cuda-cupti-cu11
 opentelemetry-instrumentation-asgi
 pyinstaller-hooks-contrib
 aiosqlite
 sphinxcontrib-jquery
 adlfs
-nvidia-cufft-cu11
 influxdb
-nvidia-curand-cu11
-nvidia-cusparse-cu11
 zc-lockfile
-nvidia-cusolver-cu11
-nvidia-nccl-cu11
 uritools
 pytest-env
 python-engineio
@@ -1073,7 +1046,6 @@ enum-compat
 pandasql
 smbprotocol
 path
-nvidia-nvtx-cu11
 plumbum
 pkce
 bitstring
@@ -1220,7 +1192,6 @@ rx
 click-default-group
 atlassian-jwt-auth
 py-partiql-parser
-s3cmd
 myst-parser
 orbax
 uwsgi
@@ -1301,7 +1272,6 @@ c7n
 flatten-dict
 riot
 requests-html
-grpcio-gcp
 peppercorn
 pydispatcher
 raven
@@ -1326,12 +1296,10 @@ telethon
 deepmerge
 phik
 sphinx-design
-pypiwin32
 facexlib
 pep8-naming
 flashtext
 flask-compress
-subprocess32
 hatch
 python-ldap
 pytest-random-order
@@ -1477,7 +1445,6 @@ deltalake
 ortools
 c7n-org
 dropbox
-functools32
 autobahn
 branca
 fpdf
@@ -1552,7 +1519,6 @@ pefile
 pywinpty
 install
 robotframework-pythonlibcore
-s3path
 requests-cache
 mlxtend
 mediapipe
@@ -1586,7 +1552,6 @@ jaconv
 roundrobin
 pytest-instafail
 anytree
-cuda-python
 smartsheet-python-sdk
 clikit
 types-cryptography
@@ -1694,7 +1659,6 @@ lightfm
 datadog-logger
 gprof2dot
 qudida
-fs-s3fs
 semgrep
 pyod
 base58
@@ -1805,7 +1769,6 @@ pyinstrument
 crypto
 usort
 elastic-apm
-apache-airflow-backport-providers-amazon
 typish
 pytablewriter
 pantsbuild-pants
@@ -1873,7 +1836,6 @@ spark-sklearn
 spinners
 pyhanko
 ansicolors
-amazon-ion
 zstd
 webrtcvad-wheels
 pytest-icdiff
@@ -2511,7 +2473,6 @@ apache-airflow-providers-papermill
 pypsrp
 openapi-codec
 python-ulid
-s3pathlib
 opentelemetry-exporter-jaeger-thrift
 marisa-trie
 airflow-exporter
@@ -2528,7 +2489,6 @@ single-source
 ratelimiter
 intel-openmp
 apache-airflow-providers-airbyte
-nvidia-ml-py3
 django-guardian
 holoviews
 colorcet
@@ -2675,7 +2635,6 @@ appengine-python-standard
 us
 jsonpath
 pandavro
-python-certifi-win32
 django-localflavor
 patchelf
 flask-script
@@ -2739,7 +2698,6 @@ mailjet-rest
 tsdownsample
 agate-excel
 ibm-cos-sdk-core
-ibm-cos-sdk-s3transfer
 openlineage-sql
 httmock
 myst-nb
@@ -2954,7 +2912,6 @@ lupa
 sorl-thumbnail
 jupyter-latex-envs
 pytest-postgresql
-s3urls
 pytest-variables
 sklearn-crfsuite
 temporalio
@@ -2998,7 +2955,6 @@ pyvisa
 check-jsonschema
 lazy
 pyactiveresource
-win32-setctime
 dag-factory
 cfscrape
 jsonslicer
@@ -3169,7 +3125,6 @@ pygerduty
 dartsclone
 sphinx-book-theme
 bezier
-opentelemetry-exporter-gcp-trace
 django-classy-tags
 pyiso8583
 dagster-cloud-cli
@@ -3541,7 +3496,6 @@ python-speech-features
 flake8-use-fstring
 django-dirtyfields
 purecloudplatformclientv2
-pybars3
 gitlint-core
 py-moneyed
 serverlessrepo
@@ -3832,7 +3786,6 @@ td-client
 sphinx-mdinclude
 exrex
 pandas-access
-opentelemetry-resourcedetector-gcp
 logging
 jaxopt
 codetiming
@@ -3852,7 +3805,6 @@ types-emoji
 pre-commit-hooks
 docstring-to-markdown
 apache-airflow-providers-jira
-python-amazon-sp-api
 pyaml-env
 zake
 browser-cookie3
@@ -3908,7 +3860,6 @@ ipcqueue
 realtime
 python-helpscout-v2
 python-glanceclient
-transforms3d
 python-oauth2
 img2pdf
 textx
@@ -4136,7 +4087,6 @@ splunk-cloud-sdk
 uri
 pytest-retry
 django-statici18n
-stable-baselines3
 django-rich
 bsdiff4
 openml
@@ -4180,7 +4130,6 @@ opentelemetry-instrumentation-pymysql
 urlextract
 arcgis2geojson
 amundsen-common
-prefect-gcp
 trainer
 simple-rest-client
 sslyze
@@ -4280,7 +4229,6 @@ parallel-ssh
 aiosmtpd
 einops-exts
 logging-formatter-anticrlf
-opentelemetry-propagator-gcp
 wxpython
 spglib
 pennylane-lightning
@@ -4512,7 +4460,6 @@ robotframework-appiumlibrary
 jsonseq
 cppy
 json-spec
-cupy-cuda11x
 paypalrestsdk
 strsim
 django-admin-autocomplete-filter
@@ -4598,10 +4545,8 @@ synchronicity
 standardjson
 blacken-docs
 uwsgitop
-tentaclio-s3
 mosaicml-cli
 flake8-functions
-no-manylinux
 plette
 pygeoif
 accept-types
@@ -4617,7 +4562,6 @@ pbtools
 tts
 aiohttp-session
 lyft-dataset-sdk
-amazon-dax-client
 edx-i18n-tools
 testrail-api
 dadaptation
@@ -4657,7 +4601,6 @@ trufflehogregexes
 df2gspread
 tabmat
 blosc
-types-pywin32
 ppscore
 delocate
 flake8-cognitive-complexity
@@ -4710,7 +4653,6 @@ django-rest-knox
 humbug
 yaml-config
 ciscoconfparse
-simple-gcp-object-downloader
 python-intervals
 acachecontrol
 edx-auth-backends
@@ -4736,7 +4678,6 @@ pycloudflared
 mip
 better-exceptions
 secrets
-dvc-s3
 mode-streaming
 vessl
 types-annoy
@@ -5195,12 +5136,10 @@ remote-pdb
 hatch-requirements-txt
 password-strength
 model-mommy
-pyjavaproperties3
 phonemizer
 sanic-cors
 mozdebug
 xbxbot
-s3
 polyfuzz
 oauth2-client
 oschmod
@@ -5617,7 +5556,6 @@ jump-consistent-hash
 datacorecommon
 pyprind
 flake8-literal
-amazon-textract-response-parser
 pytest-click
 bowler
 cufflinks
@@ -5772,7 +5710,6 @@ objectpath
 pytest-level
 streamlit-image-coordinates
 trio-typing
-django-s3-storage
 musdb
 types-pyjwt
 pyroma
@@ -5800,7 +5737,6 @@ sphinxcontrib-openapi
 junit-xml-2
 sparkpost
 gruut-lang-fr
-dis3
 python-gettext
 geohashlite
 sceptre
@@ -5964,7 +5900,6 @@ unicon-plugins
 pyconify
 termstyle
 sib-api-v3-sdk
-amazon-kclpy
 airportsdata
 dj-stripe
 django-registration
@@ -6006,7 +5941,6 @@ mkl-fft
 apache-airflow-providers-samba
 klio-exec
 session-info
-dagster-gcp
 awxkit
 avalara
 unicode
@@ -6533,7 +6467,6 @@ mparticle
 marshmallow-union
 romaji
 os-brick
-django-s3direct
 ecs-deploy
 aioredlock
 histoprint
@@ -6593,7 +6526,6 @@ smjsindustry
 itk-core
 fast-bleu
 geohash
-pulumi-gcp
 passwordgenerator
 drf-standardized-errors
 nr-util
@@ -6673,7 +6605,6 @@ databricks-mosaic
 honeybadger
 opensearch-logger
 flet
-tinys3
 asdf-wcs-schemas
 mars
 dbus-next
@@ -6915,7 +6846,6 @@ stemming
 asdf-astropy
 minilog
 flynt
-c7n-gcp
 aiocoap
 aspose-words
 kivy-deps-sdl2
@@ -7109,7 +7039,6 @@ adafruit-circuitpython-busdevice
 django-bleach
 svg-path
 dilivia-data-client
-amazon-textract-caller
 aimrocks
 traceback-with-variables
 loggly-python-handler
@@ -7146,7 +7075,6 @@ nncf
 street-address
 openpulse
 appinsights
-nvidia-pyindex
 httpbin
 contentful-management
 apache-airflow-providers-grpc
@@ -7158,7 +7086,6 @@ httpx-sse
 librespot
 sailthru-client
 sumologic-collectd-metrics
-nvidia-cuda-nvcc-cu11
 kweb
 cirq
 sklearn-json

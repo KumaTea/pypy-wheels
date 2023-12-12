@@ -25,7 +25,7 @@ def sha_check(filename: str, url: str, pbar: tqdm):
     if saved_hash[filename]['verify']:
         pbar.write(f'\r{filename} already verified!', end='')
         return True
-    local_sha = saved_hash[filename]['sha']
+    local_sha = saved_hash[filename]['sha256']
     remote_sha = url.split('#sha256=')[1]
     assert local_sha == remote_sha, f'{filename} sha256sum not match! local: {local_sha}, remote: {remote_sha}'
 

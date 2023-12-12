@@ -31,12 +31,12 @@ saved_hash = get_saved_hash()
 
 def get_whl_sha256(name: str):
     if name in saved_hash:
-        return saved_hash[name]['sha']
+        return saved_hash[name]['sha256']
     if name in local_whl_dict:
         path = local_whl_dict[name]
         with open(path, 'rb') as f:
             sha256sum = hashlib.sha256(f.read()).hexdigest()
-        saved_hash[name] = {'sha': sha256sum, 'verify': False}
+        saved_hash[name] = {'sha256': sha256sum, 'verify': False}
         return sha256sum
     return None
 

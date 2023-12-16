@@ -105,9 +105,10 @@ def building_reader(pkg_name: str, p: subprocess.Popen, pbar: tqdm = None) -> tu
 
 def gen_packages(
         plat: str = 'win',
-        since: str = None, until: str = None,
+        since: str = None,
         only: str = None,
-        retry: bool = False, ver: str = None
+        retry: bool = False,
+        ver: str = None
 ):
     if only:
         print(f'Building {only}...')
@@ -136,8 +137,12 @@ def gen_packages(
             else:
                 index = packages.index(since)
             if index > 0:
-                packages = ['NotARealPackage'] * index + packages[index:]
+                packages = packages[index:]
 
+    return packages
+
+
+def gen_until_index(packages: list, until: str = None):
     if until:
         if until.isdigit():
             until_index = int(until)
@@ -145,8 +150,7 @@ def gen_packages(
             until_index = packages.index(until)
     else:
         until_index = len(packages)
-
-    return packages, until_index
+    return until_index
 
 
 def build(
@@ -161,7 +165,8 @@ def build(
         exit(1)
 
     print(f'Building wheels for pypy {ver}...')
-    packages, until_index = gen_packages(plat, since, until, only, retry, ver)
+    packages = gen_packages(plat, since, only, retry, ver)
+    until_index = gen_until_index(packages, until)
     success = []
     failed = []
 
@@ -193,13 +198,21 @@ def build(
         if EXTRA_CDN not in pip_conf:
             extra_index_flag = f'--extra-index-url {EXTRA_INDEX_URL}'
 
+    if since:
+        if since.isdigit():
+            since_index = int(since)
+        else:
+            with open(f'{pkg_dir}/packages.txt', 'r') as f:
+                all_packages = f.read().splitlines()
+            since_index = all_packages.index(since)
+    else:
+        since_index = 0
+
     env = os.environ
-    pbar = tqdm(packages)
+    pbar = tqdm(packages, initial=since_index, total=len(packages) + since_index)
     count = 0
     for pkg in pbar:
-        if pkg == 'NotARealPackage':
-            continue
-        pbar.set_description(f'S: {len(success)}, F: {len(failed)}, C: {pkg}')
+        pbar.set_description(f'S: {len(success)}  F: {len(failed)}  C: {pkg}')
         command = (
             f'{py_path} -m '
             f'pip install -U -v '
@@ -225,13 +238,12 @@ def build(
 
             error_log = f'log/{ver}/{pkg}.log'
             if is_success_build(pkg, result, error):
-                pbar.write('########## SUCCESS ##########')
                 success.append(pkg)
+                pbar.write(f'\n\n🎉 {pkg} 🎉\n\n')
                 count += 1
                 if os.path.isfile(error_log):
                     os.remove(error_log)
                     pbar.write(f'Removed {error_log}')
-                pbar.write('##########  END  ##########')
             else:
                 failed.append(pkg)
                 # pbar.write(result)
@@ -246,6 +258,7 @@ def build(
                     f.write(result + error)
                 pbar.write(f'Log saved to {error_log}')
                 pbar.write('##########  END  ##########')
+                pbar.write('\n')
 
             current_index = packages.index(pkg)
             if current_index >= until_index:
@@ -269,14 +282,14 @@ def build(
             failed.append(pkg)
             pbar.write(str(e))
 
-    pbar.write(f'Success: {len(success)}, Failed: {len(failed)}')
+    pbar.write(f'Success: {len(success)}  Failed: {len(failed)}')
     return success, failed
 
 
 NO_UNINST = [
     'pip', 'setuptools', 'wheel',
-    'certifi', 'wrapt',
-    'semantic_version'
+    'certifi', 'cffi', 'greenlet', 'hpy', 'readline', 'wrapt',
+    'semantic_version',
 ]
 
 
@@ -290,7 +303,7 @@ def uninst_all(ver: str, py_path: str, plat: str = 'win', upper_pbar: tqdm = Non
 
         pbar = tqdm(pkgs)
         for pkg in pbar:
-            if any([i in pkg for i in NO_UNINST]):
+            if any(pkg.startswith(f'{p}==') for p in NO_UNINST):
                 continue
             p = subprocess.Popen(f'{uninst_cmd} {pkg}'.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             popen_reader(p, pbar)
@@ -299,9 +312,6 @@ def uninst_all(ver: str, py_path: str, plat: str = 'win', upper_pbar: tqdm = Non
 
         p = subprocess.Popen(uninst_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         popen_reader(p, upper_pbar)
-
-    if os.path.exists(f'freeze.{ver}.txt'):
-        os.remove(f'freeze.{ver}.txt')
 
     # ensure tools
     p = subprocess.Popen(

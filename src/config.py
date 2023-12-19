@@ -24,8 +24,8 @@ if not os.path.isdir(pkg_dir):
 
 build_versions = ['3.7', '3.8', '3.9', '3.10']
 
-LINUX_MAX_LOAD = 4
-WIN_MAX_LOAD = 4
+LINUX_MAX_LOAD = 16
+WIN_MAX_LOAD = 16
 
 
 # win

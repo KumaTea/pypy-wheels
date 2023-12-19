@@ -34,8 +34,12 @@ def is_success_build(pkg_name: str, output: str, error: str = None):
     for line in output.splitlines():
         if any([
             error is not None and 'error' not in error,
-            'successfully installed' in line and pkg_name in line,
-            'requirement already satisfied' in line and pkg_name in line,
+            'successfully installed' in line and f' {pkg_name}' in line,
+            all([
+                'requirement already satisfied' in line,
+                f' {pkg_name}' in line,
+                'from {pkg_name}' not in line,
+            ]),
         ]):
             return True
     return False
@@ -142,10 +146,13 @@ def gen_packages(
     return packages
 
 
-def gen_until_index(packages: list, until: str = None):
+def gen_until_index(packages: list, until: str = None, since_index: int = 0):
+    """
+    from all index to index of generated packages
+    """
     if until:
         if until.isdigit():
-            until_index = int(until)
+            until_index = int(until) - since_index
         else:
             until_index = packages.index(until)
     else:
@@ -166,7 +173,7 @@ def build(
 
     print(f'Building wheels for pypy {ver}...')
     packages = gen_packages(plat, since, only, retry, ver)
-    until_index = gen_until_index(packages, until)
+    all_packages = gen_packages(plat)
     success = []
     failed = []
 
@@ -198,15 +205,17 @@ def build(
         if EXTRA_CDN not in pip_conf:
             extra_index_flag = f'--extra-index-url {EXTRA_INDEX_URL}'
 
+    # since_index is index of all packages
     if since:
         if since.isdigit():
             since_index = int(since)
         else:
-            with open(f'{pkg_dir}/packages.txt', 'r') as f:
-                all_packages = f.read().splitlines()
             since_index = all_packages.index(since)
     else:
         since_index = 0
+
+    # until_index is index of generated packages
+    until_index = gen_until_index(packages, until, since_index)
 
     env = os.environ
     pbar = tqdm(packages, initial=since_index, total=len(packages) + since_index)

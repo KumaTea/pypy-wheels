@@ -8,6 +8,14 @@ from tools import get_whl_list
 whl_list = get_whl_list()
 
 
+def get_py_ver_from_abi(abi: str):
+    # pypy310_pp73
+    assert abi.startswith('pypy')
+    assert abi.endswith('_pp73')
+    ver = abi[4:-5]
+    return f'pp{ver}'
+
+
 def get_plat_dup():
     pkgs = {}
     dup = []
@@ -15,7 +23,10 @@ def get_plat_dup():
     for pair in whl_list:
         file, url = pair
         assert file.count('-') == 4, f'{file} has a wired name!'
+
         name, ver, pv_ver, abi, plat = file.split('-')
+        if pv_ver == 'pp373':  # universal tag
+            pv_ver = get_py_ver_from_abi(abi)
 
         if name not in pkgs:
             pkgs[name] = {}

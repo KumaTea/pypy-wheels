@@ -54,17 +54,23 @@ def copy_wheels(dst: str):
             pbar.set_description(f'Coping {file}')
             matched = False
             for ver in build_versions:
-                if f'pp{ver.replace(".", "")}-pypy{ver.replace(".", "")}' in file:
+                if all([
+                    any([
+                        f'pp{ver.replace(".", "")}' in file,
+                        'pp373' in file,
+                    ]),
+                    f'pypy{ver.replace(".", "")}' in file,
+                ]):
+                    matched = True
                     if not (os.path.isfile(f'{dst}/{ver}/{file}') or os.path.isfile(f'{LINUX_MANY_DIR}/done/{file}')):
                         shutil.copy(f'{root}/{file}', f'{dst}/{ver}/{file}')
                         copied_files.append(file)
-                        matched = True
                         break
             if 'none' in file:
+                matched = True
                 if not (os.path.isfile(f'{dst}/none/{file}') or os.path.isfile(f'{LINUX_MANY_DIR}/done/{file}')):
                     shutil.copy(f'{root}/{file}', f'{dst}/none/{file}')
                     copied_files.append(file)
-                    matched = True
             if not matched:
                 logging.error(f'Unmatched: {file}')
 

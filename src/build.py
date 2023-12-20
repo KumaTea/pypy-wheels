@@ -38,7 +38,7 @@ def is_success_build(pkg_name: str, output: str, error: str = None):
             all([
                 'requirement already satisfied' in line,
                 f' {pkg_name}' in line,
-                'from {pkg_name}' not in line,
+                f'from {pkg_name}' not in line,
             ]),
         ]):
             return True

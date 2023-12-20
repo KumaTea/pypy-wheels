@@ -13,7 +13,7 @@
 7. Upload wheels in `E:\Cache\linux\whl\upload` to GitHub release
 8. Run `gen_whl.py`
 9. Run `gen_index.py` to check PyPI conflicts
-10. Run `copy_whls.py`
+10. Run `check_dup.py`
 11. `git cm` & `git push`
 12. Wait for GitHub Actions to finish
 13. Run `sha_check.py` to check corrupted files

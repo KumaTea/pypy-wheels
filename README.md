@@ -8,7 +8,7 @@ Prebuilt PyPy wheels of the most popular packages
 ## How to use
 
 ```bash
-pip install <package> --prefer-binary --extra-index-url https://pypy.kmtea.eu/simple
+pip install <package> --prefer-binary --extra-index-url https://ext.kmtea.eu/simple
 ```
 
 The `--prefer-binary` option is to ensure that
@@ -19,18 +19,18 @@ An alternative way is to use the `--find-links` option,
 which is not recommended because the size of the index is large:
 
 ```bash
-pip install <package> --prefer-binary --find-links https://pypy.kmtea.eu/wheels.html
+pip install <package> --prefer-binary --find-links https://ext.kmtea.eu/wheels.html
 ```
 
 If you have trouble accessing GitHub Pages,
 you may try the CDN hosted by CloudFlare:
 
 ```bash
-pip install <package> --prefer-binary --extra-index-url https://pypy.kmtea.eu/cdn
+pip install <package> --prefer-binary --extra-index-url https://ext.kmtea.eu/cdn
 ```
 
 ```bash
-pip install <package> --prefer-binary --find-links https://pypy.kmtea.eu/wheels-cdn.html
+pip install <package> --prefer-binary --find-links https://ext.kmtea.eu/wheels-cdn.html
 ```
 
 ## Other info

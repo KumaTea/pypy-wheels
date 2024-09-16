@@ -30,14 +30,19 @@ excluded_packages = [
     'amazon',
     'boto',
     's3',
+
     'azure',
+
     'google',
     'gcloud',
     'gcp',
 
+    'aliyun',
+    'alibabacloud',
+
     # Others
     'no-manylinux',
-    # 'nightly',
+    'nightly',
 ]
 
 linux_only_packages = [
@@ -49,6 +54,10 @@ windows_only_packages = [
 ]
 
 include_packages = [
+    'pyrogram',
+    'tgcrypto',
+    'telethon',
+    'cryptg',
 ]
 
 

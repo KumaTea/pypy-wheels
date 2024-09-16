@@ -16,4 +16,4 @@
 10. Run `check_dup.py`
 11. `git cm` & `git push`
 12. Wait for GitHub Actions to finish
-13. Run `sha_check.py` to check corrupted files
+13. Run `check_sha.py` to check corrupted files

@@ -1,6 +1,6 @@
 # latest pypy versions for each python version
 
-LATEST_PYPY = '7.3.13'
+LATEST_PYPY = '7.3.15'
 
 PYTHON_TO_PYPY = {
     '3.7': '7.3.9',

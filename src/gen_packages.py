@@ -6,7 +6,7 @@ import time
 import requests
 
 
-DATA_URL = 'https://hugovk.github.io/top-pypi-packages/top-pypi-packages-30-days.min.json'
+DATA_URL = 'https://hugovk.github.io/top-pypi-packages/top-pypi-packages.min.json'
 
 packages_file = '../pkg/packages.txt'
 linux_packages_file = '../pkg/pkgs_linux.txt'
